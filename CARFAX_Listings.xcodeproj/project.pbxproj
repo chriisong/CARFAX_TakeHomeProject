@@ -10,10 +10,12 @@
 		4A447DA2252515BE0078304B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A447DA1252515BE0078304B /* AppDelegate.swift */; };
 		4A447DA4252515BE0078304B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A447DA3252515BE0078304B /* SceneDelegate.swift */; };
 		4A447DA6252515BE0078304B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A447DA5252515BE0078304B /* ViewController.swift */; };
-		4A447DA9252515BE0078304B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A447DA7252515BE0078304B /* Main.storyboard */; };
 		4A447DAC252515BE0078304B /* CARFAX_Listings.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4A447DAA252515BE0078304B /* CARFAX_Listings.xcdatamodeld */; };
 		4A447DAE252515BE0078304B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A447DAD252515BE0078304B /* Assets.xcassets */; };
 		4A447DB1252515BE0078304B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A447DAF252515BE0078304B /* LaunchScreen.storyboard */; };
+		4A447DC42525180E0078304B /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A447DC32525180E0078304B /* NetworkManager.swift */; };
+		4A447DC82525187E0078304B /* CFError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A447DC72525187E0078304B /* CFError.swift */; };
+		4A447DCB252518C00078304B /* Listing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A447DCA252518C00078304B /* Listing.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,11 +23,13 @@
 		4A447DA1252515BE0078304B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4A447DA3252515BE0078304B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		4A447DA5252515BE0078304B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		4A447DA8252515BE0078304B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4A447DAB252515BE0078304B /* CARFAX_Listings.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CARFAX_Listings.xcdatamodel; sourceTree = "<group>"; };
 		4A447DAD252515BE0078304B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4A447DB0252515BE0078304B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4A447DB2252515BE0078304B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4A447DC32525180E0078304B /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		4A447DC72525187E0078304B /* CFError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CFError.swift; sourceTree = "<group>"; };
+		4A447DCA252518C00078304B /* Listing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Listing.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,16 +62,82 @@
 		4A447DA0252515BE0078304B /* CARFAX_Listings */ = {
 			isa = PBXGroup;
 			children = (
-				4A447DA1252515BE0078304B /* AppDelegate.swift */,
-				4A447DA3252515BE0078304B /* SceneDelegate.swift */,
-				4A447DA5252515BE0078304B /* ViewController.swift */,
-				4A447DA7252515BE0078304B /* Main.storyboard */,
-				4A447DAD252515BE0078304B /* Assets.xcassets */,
-				4A447DAF252515BE0078304B /* LaunchScreen.storyboard */,
 				4A447DB2252515BE0078304B /* Info.plist */,
-				4A447DAA252515BE0078304B /* CARFAX_Listings.xcdatamodeld */,
+				4A447DBF2525174F0078304B /* View Controllers */,
+				4A447DBC252517410078304B /* Model */,
+				4A447DC1252517580078304B /* Reusable */,
+				4A447DC0252517540078304B /* Extensions */,
+				4A447DBE2525174C0078304B /* Utilities */,
+				4A447DBD252517450078304B /* Core Data */,
+				4A447DB9252516FF0078304B /* Managers */,
+				4A447DBB2525173F0078304B /* Support */,
 			);
 			path = CARFAX_Listings;
+			sourceTree = "<group>";
+		};
+		4A447DB9252516FF0078304B /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				4A447DC32525180E0078304B /* NetworkManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		4A447DBB2525173F0078304B /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				4A447DAD252515BE0078304B /* Assets.xcassets */,
+				4A447DAF252515BE0078304B /* LaunchScreen.storyboard */,
+				4A447DAA252515BE0078304B /* CARFAX_Listings.xcdatamodeld */,
+				4A447DA1252515BE0078304B /* AppDelegate.swift */,
+				4A447DA3252515BE0078304B /* SceneDelegate.swift */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		4A447DBC252517410078304B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4A447DCA252518C00078304B /* Listing.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		4A447DBD252517450078304B /* Core Data */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Core Data";
+			sourceTree = "<group>";
+		};
+		4A447DBE2525174C0078304B /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				4A447DC72525187E0078304B /* CFError.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		4A447DBF2525174F0078304B /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				4A447DA5252515BE0078304B /* ViewController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		4A447DC0252517540078304B /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		4A447DC1252517580078304B /* Reusable */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Reusable;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -129,7 +199,6 @@
 			files = (
 				4A447DB1252515BE0078304B /* LaunchScreen.storyboard in Resources */,
 				4A447DAE252515BE0078304B /* Assets.xcassets in Resources */,
-				4A447DA9252515BE0078304B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,23 +210,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				4A447DA6252515BE0078304B /* ViewController.swift in Sources */,
+				4A447DCB252518C00078304B /* Listing.swift in Sources */,
 				4A447DAC252515BE0078304B /* CARFAX_Listings.xcdatamodeld in Sources */,
+				4A447DC42525180E0078304B /* NetworkManager.swift in Sources */,
 				4A447DA2252515BE0078304B /* AppDelegate.swift in Sources */,
 				4A447DA4252515BE0078304B /* SceneDelegate.swift in Sources */,
+				4A447DC82525187E0078304B /* CFError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		4A447DA7252515BE0078304B /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				4A447DA8252515BE0078304B /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		4A447DAF252515BE0078304B /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
