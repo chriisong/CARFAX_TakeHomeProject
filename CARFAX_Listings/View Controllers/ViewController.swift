@@ -11,14 +11,11 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         NetworkManager.shared.getListing { result in
             switch result {
             case .failure(let error): print(error.rawValue)
             case .success(let listings):
-                for listing in listings {
-                    print(listing)
-                }
+                print(listings.listings.count)
             }
         }
         

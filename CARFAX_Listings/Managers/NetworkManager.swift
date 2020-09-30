@@ -14,7 +14,7 @@ class NetworkManager {
     
     private init() {}
     
-    func getListing(completionHandler: @escaping (Result<[Listing], CFError>) -> Void) {
+    func getListing(completionHandler: @escaping (Result<CARFAXData, CFError>) -> Void) {
         guard let url = URL(string: url) else {
             completionHandler(.failure(.invalidResponse))
             return
@@ -37,7 +37,8 @@ class NetworkManager {
             
             do {
                 let decoder = JSONDecoder()
-                let listings = try decoder.decode([Listing].self, from: data)
+                
+                let listings = try decoder.decode(CARFAXData.self, from: data)
                 completionHandler(.success(listings))
             } catch {
                 completionHandler(.failure(.invalidData))
