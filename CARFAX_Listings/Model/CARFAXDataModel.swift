@@ -8,7 +8,7 @@
 
 import Foundation
 
-// MARK: - Welcome
+// MARK: - CARFAXData
 struct CARFAXData: Codable {
     let backfillCount: Int
     let breadCrumbs: [BreadCrumb]
@@ -54,7 +54,11 @@ struct Facet: Codable {
 }
 
 // MARK: - Listing
-struct Listing: Codable {
+struct Listing: Codable, Hashable {
+    private let identifier = UUID()
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(identifier)
+    }
     let accidentHistory: History
     let advantage, backfill: Bool
     let badge: Badge
@@ -117,7 +121,7 @@ struct Listing: Codable {
 }
 
 // MARK: - History
-struct History: Codable {
+struct History: Codable, Hashable {
     let accidentSummary: [AccidentSummary]?
     let icon: AccidentHistoryIcon
     let iconURL: String
@@ -129,28 +133,38 @@ struct History: Codable {
         case iconURL = "iconUrl"
         case text, history
     }
+    
+    private let identifier = UUID()
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(identifier)
+    }
 }
 
-enum AccidentSummary: String, Codable {
+enum AccidentSummary: String, Codable, Hashable {
     case noAccidentDamageReportedToCARFAX = "No accident/damage reported to CARFAX"
 }
 
 // MARK: - AccidentHistoryHistory
-struct AccidentHistoryHistory: Codable {
+struct AccidentHistoryHistory: Codable, Hashable {
     let city, endOwnershipDate: String?
     let ownerNumber: Int
     let purchaseDate, state: String?
     let averageMilesPerYear: Int?
     let useType: UseType?
+    
+    private let identifier = UUID()
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(identifier)
+    }
 }
 
-enum UseType: String, Codable {
+enum UseType: String, Codable, Hashable {
     case commercialUse = "Commercial Use"
     case personalLease = "Personal Lease"
     case personalUse = "Personal Use"
 }
 
-enum AccidentHistoryIcon: String, Codable {
+enum AccidentHistoryIcon: String, Codable, Hashable {
     case commercial = "commercial"
     case noAccident = "noAccident"
     case owner1 = "owner1"
@@ -158,7 +172,7 @@ enum AccidentHistoryIcon: String, Codable {
     case personal = "personal"
 }
 
-enum AccidentHistoryText: String, Codable {
+enum AccidentHistoryText: String, Codable, Hashable {
     case carfax1Owner = "CARFAX 1-Owner"
     case commercialUse = "Commercial Use"
     case noAccidentOrDamageReported = "No Accident or Damage Reported"
@@ -176,13 +190,13 @@ enum BedLength: String, Codable {
     case unspecified = "Unspecified"
 }
 
-enum Bodytype: String, Codable {
+enum Bodytype: String, Codable, Hashable {
     case sedan = "Sedan"
     case suv = "SUV"
 }
 
 // MARK: - Dealer
-struct Dealer: Codable {
+struct Dealer: Codable, Hashable {
     let address: String
     let backfill: Bool
     let carfaxID: String
@@ -209,36 +223,41 @@ struct Dealer: Codable {
         case dealerInventoryURL = "dealerInventoryUrl"
         case dealerLeadType, dealerReviewComments, dealerReviewCount, dealerReviewDate, dealerReviewRating, dealerReviewReviewer, dealerReviewTitle, latitude, longitude, name, onlineOnly, phone, state, zip
     }
+    
+    private let identifier = UUID()
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(identifier)
+    }
 }
 
-enum State: String, Codable {
+enum State: String, Codable, Hashable {
     case ct = "CT"
     case md = "MD"
     case ny = "NY"
     case va = "VA"
 }
 
-enum DealerType: String, Codable {
+enum DealerType: String, Codable, Hashable {
     case new = "NEW"
     case used = "USED"
 }
 
-enum Drivetype: String, Codable {
+enum Drivetype: String, Codable, Hashable {
     case awd = "AWD"
     case fwd = "FWD"
 }
 
-enum Engine: String, Codable {
+enum Engine: String, Codable, Hashable {
     case the4Cyl = "4 Cyl"
     case the6Cyl = "6 Cyl"
 }
 
-enum Fuel: String, Codable {
+enum Fuel: String, Codable, Hashable {
     case gasoline = "Gasoline"
 }
 
 // MARK: - Images
-struct Images: Codable {
+struct Images: Codable, Hashable {
     let baseURL: String
     let firstPhoto: FirstPhoto?
     let large, medium, small: [String]
@@ -250,24 +269,34 @@ struct Images: Codable {
 }
 
 // MARK: - FirstPhoto
-struct FirstPhoto: Codable {
+struct FirstPhoto: Codable, Hashable {
     let large, medium, small: String
+    
+    private let identifier = UUID()
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(identifier)
+    }
 }
 
-enum Make: String, Codable {
+enum Make: String, Codable, Hashable {
     case acura = "Acura"
 }
 
 // MARK: - MonthlyPaymentEstimate
-struct MonthlyPaymentEstimate: Codable {
+struct MonthlyPaymentEstimate: Codable, Hashable {
     let downPaymentAmount: Double
     let downPaymentPercent, interestRate: Int
     let loanAmount, monthlyPayment: Double
     let price, termInMonths: Int
+    
+    private let identifier = UUID()
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(identifier)
+    }
 }
 
 // MARK: - OnePriceArrow
-struct OnePriceArrow: Codable {
+struct OnePriceArrow: Codable, Hashable {
     let arrow: Arrow
     let arrowURL: String
     let icon: OnePriceArrowIcon
@@ -282,14 +311,19 @@ struct OnePriceArrow: Codable {
         case iconURL = "iconUrl"
         case order, text
     }
+    
+    private let identifier = UUID()
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(identifier)
+    }
 }
 
-enum Arrow: String, Codable {
+enum Arrow: String, Codable, Hashable {
     case down = "DOWN"
     case up = "UP"
 }
 
-enum OnePriceArrowIcon: String, Codable {
+enum OnePriceArrowIcon: String, Codable, Hashable {
     case cpo = "cpo"
     case noAccident = "noAccident"
     case owner1 = "owner1"
@@ -299,7 +333,7 @@ enum OnePriceArrowIcon: String, Codable {
     case wellMaintained = "wellMaintained"
 }
 
-enum OnePriceArrowText: String, Codable {
+enum OnePriceArrowText: String, Codable, Hashable {
     case certifiedPreOwned = "Certified Pre-Owned"
     case noAccidentsReported = "No Accidents Reported"
     case openRecall = "Open Recall"
@@ -310,12 +344,12 @@ enum OnePriceArrowText: String, Codable {
     case the1OwnerVehicle = "1-Owner Vehicle"
 }
 
-enum RecordType: String, Codable {
+enum RecordType: String, Codable, Hashable {
     case enhanced = "ENHANCED"
 }
 
 // MARK: - ServiceHistory
-struct ServiceHistory: Codable {
+struct ServiceHistory: Codable, Hashable {
     let history: [ServiceHistoryHistory]?
     let icon: OnePriceArrowIcon
     let iconURL: String
@@ -327,10 +361,15 @@ struct ServiceHistory: Codable {
         case iconURL = "iconUrl"
         case number, text
     }
+    
+    private let identifier = UUID()
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(identifier)
+    }
 }
 
 // MARK: - ServiceHistoryHistory
-struct ServiceHistoryHistory: Codable {
+struct ServiceHistoryHistory: Codable, Hashable {
     let city, date, historyDescription: String
     let odometerReading: Int
     let source: String
@@ -340,6 +379,11 @@ struct ServiceHistoryHistory: Codable {
         case city, date
         case historyDescription = "description"
         case odometerReading, source, state
+    }
+    
+    private let identifier = UUID()
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(identifier)
     }
 }
 
@@ -354,7 +398,7 @@ enum Trim: String, Codable {
     case unspecified = "Unspecified"
 }
 
-enum VehicleCondition: String, Codable {
+enum VehicleCondition: String, Codable, Hashable {
     case used = "Used"
 }
 
@@ -369,14 +413,19 @@ struct RelatedLinks: Codable {
 }
 
 // MARK: - Acura
-struct Acura: Codable {
+struct Acura: Codable, Hashable {
     let count: Int
     let text: String
     let url: String
+    
+    private let identifier = UUID()
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(identifier)
+    }
 }
 
 // MARK: - SearchArea
-struct SearchArea: Codable {
+struct SearchArea: Codable, Hashable {
     let city: String
     let dynamicRadii: [Int]
     let dynamicRadius: Bool
@@ -384,6 +433,11 @@ struct SearchArea: Codable {
     let radius: Int
     let state: State
     let zip: String
+    
+    private let identifier = UUID()
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(identifier)
+    }
 }
 
 // MARK: - SearchRequest
