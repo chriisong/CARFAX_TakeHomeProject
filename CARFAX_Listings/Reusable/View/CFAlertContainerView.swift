@@ -83,6 +83,7 @@ class CFAlertContainerView: UIView {
             actionButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -inset),
             actionButton.heightAnchor.constraint(equalToConstant: 44)
         ])
+        
         titleLabel.text = alertTitle ?? "Something went wrong here"
         messageLabel.text = message ?? "Unable to complete request"
         actionButton.setTitle(buttonTitle ?? "OK", for: .normal)

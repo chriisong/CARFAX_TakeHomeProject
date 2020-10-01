@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
-    <device id="ipad9_7" orientation="landscape" layout="fullscreen" appearance="light"/>
+    <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -12,30 +12,30 @@
         <scene sceneID="EHf-IW-A2E">
             <objects>
                 <viewController id="01J-lp-oVM" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                    <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Take Home Project" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="br7-uS-60C">
-                                <rect key="frame" x="20" y="176.5" width="984" height="41"/>
+                                <rect key="frame" x="20" y="176.5" width="280" height="36"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Written with ♥️ by:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BV3-GC-cwN">
-                                <rect key="frame" x="20" y="317.5" width="984" height="20.5"/>
+                                <rect key="frame" x="20" y="312.5" width="280" height="20.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chris Song" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4OA-M6-qyL">
-                                <rect key="frame" x="20" y="346" width="984" height="41"/>
+                                <rect key="frame" x="20" y="341" width="280" height="36"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CARFAXCanada-Logo" translatesAutoresizingMaskIntoConstraints="NO" id="q6g-7c-pCD">
-                                <rect key="frame" x="20" y="97" width="984" height="47.5"/>
+                                <rect key="frame" x="20" y="97" width="280" height="47.5"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -49,7 +49,6 @@
                             <constraint firstItem="4OA-M6-qyL" firstAttribute="top" secondItem="BV3-GC-cwN" secondAttribute="bottom" constant="7.9999999999999432" id="N7R-nw-Blc"/>
                             <constraint firstItem="br7-uS-60C" firstAttribute="top" secondItem="q6g-7c-pCD" secondAttribute="bottom" constant="32" id="Q7p-Gr-6aJ"/>
                             <constraint firstItem="4OA-M6-qyL" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="S4c-HA-fqh"/>
-                            <constraint firstItem="q6g-7c-pCD" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="height" multiplier="187:368" id="VeI-zY-VCk"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="4OA-M6-qyL" secondAttribute="trailing" constant="20" id="ZEr-HJ-QF1"/>
                             <constraint firstItem="q6g-7c-pCD" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="aBv-0t-3mW"/>
                             <constraint firstItem="BV3-GC-cwN" firstAttribute="top" secondItem="br7-uS-60C" secondAttribute="bottom" constant="100" id="fDf-H8-6zb"/>

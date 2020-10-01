@@ -15,12 +15,14 @@ class ListingViewController: UIViewController {
         case main
     }
     
+    // MARK: Collection View Related
     private var collectionView: CFCollectionView!
     private var dataSource: UICollectionViewDiffableDataSource<Section, Listing>!
     private var snapshot: NSDiffableDataSourceSnapshot<Section, Listing>!
     
     private var listings: [Listing] = []
     
+    // MARK: Saved List Core Data Provider
     private lazy var savedListingDataProvider: SavedListingDataProvider = {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let provider = SavedListingDataProvider(
@@ -40,9 +42,7 @@ class ListingViewController: UIViewController {
         configureDataSource()
         configureNavigationBar()
         configureSearchController()
-
     }
-    
 }
 
 extension ListingViewController {
@@ -101,14 +101,19 @@ extension ListingViewController {
         switch action.title {
         case SortOptions.priceHigh.title:
             self.listings.sort {$0.listPrice > $1.listPrice}
+            
         case SortOptions.priceLow.title:
             self.listings.sort {$0.listPrice < $1.listPrice}
+            
         case SortOptions.mileHigh.title:
             self.listings.sort {$0.mileage > $1.mileage}
+            
         case SortOptions.mileLow.title:
             self.listings.sort {$0.mileage < $1.mileage}
+            
         default: break
         }
+        
         self.setupSnapshot(filter: self.listings, animated: true)
     }
     
@@ -129,6 +134,7 @@ extension ListingViewController {
         guard let url = URL(string: "tel://\(phoneNumber)") else {
             return
         }
+        
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
     private func mapButtonPressed(for listing: Listing, at indexPath: IndexPath) {
@@ -138,7 +144,9 @@ extension ListingViewController {
         address.state = listing.dealer.state.rawValue
         address.postalCode = listing.dealer.zip
         address.country = "USA"
+        
         let geoloc = CLGeocoder()
+        
         geoloc.geocodePostalAddress(address) { placemarks, _ in
             guard let placemark = placemarks?.first else {
                 return
@@ -153,6 +161,7 @@ extension ListingViewController {
         dataSource = UICollectionViewDiffableDataSource<Section, Listing>(collectionView: collectionView) { collectionView, indexPath, listing -> UICollectionViewCell? in
             return collectionView.dequeueConfiguredReusableCell(using: self.configureCell(), for: indexPath, item: listing)
         }
+        
         setupSnapshot(filter: self.listings)
     }
     
@@ -176,6 +185,7 @@ extension ListingViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
     }
+    
     func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { suggestedActions -> UIMenu? in
             let saveAction = UIAction(title: "Save", image: Image.arrowDownHeartFill) { (action) in
@@ -201,8 +211,9 @@ extension ListingViewController: UISearchResultsUpdating {
             filteredListings.removeAll()
             setupSnapshot(filter: self.listings)
             isSearching = false
-            
-            return }
+            return
+        }
+        
         isSearching = true
         
         filteredListings = listings.filter {
@@ -212,6 +223,7 @@ extension ListingViewController: UISearchResultsUpdating {
                 || $0.dealer.city.lowercased().contains(filter.lowercased())
                 || $0.dealer.name.lowercased().contains(filter.lowercased())
         }
+        
         setupSnapshot(filter: filteredListings, animated: true)
     }
 }

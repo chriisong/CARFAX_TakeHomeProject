@@ -13,13 +13,13 @@ class SavedListingViewController: UIViewController {
         case main
     }
     
-    // Header cell data type
+    // MARK: Header cell data type
     struct HeaderItem: Hashable {
         let title: String
         let listing: [ListingItem]
     }
     
-    // Listing cell data type
+    // MARK: Listing cell data type
     struct ListingItem: Hashable {
         let name: String
         let price: Int
@@ -38,11 +38,13 @@ class SavedListingViewController: UIViewController {
         }
     }
     
+    // MARK: Saved Listing View Controller's Diffable Data Source Item Types
     enum SavedListItem: Hashable {
         case header(HeaderItem)
         case listing(ListingItem)
     }
     
+    // MARK: Main
     private var collectionView: CFCollectionView!
     private var dataSource: UICollectionViewDiffableDataSource<HeaderItem, SavedListItem>!
     private var snapshot: NSDiffableDataSourceSnapshot<HeaderItem, SavedListItem>!
@@ -50,6 +52,7 @@ class SavedListingViewController: UIViewController {
     private var listings: [Listing] = []
     private var headerData: [HeaderItem] = []
     
+    // MARK: Saved Listing Core Data Provider
     private lazy var savedListingDataProvider: SavedListingDataProvider = {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let provider = SavedListingDataProvider(
@@ -62,6 +65,7 @@ class SavedListingViewController: UIViewController {
         super.viewWillAppear(animated)
         fetchListings(animated: false)
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureHierarchy()
@@ -77,6 +81,7 @@ extension SavedListingViewController {
             case .failure(let error): print(error.rawValue)
             case .success(let data):
                 DispatchQueue.main.async {
+                    // Remove all listings before each fetch to prevent duplicate data
                     self.listings.removeAll()
                     guard let savedListings = self.savedListingDataProvider.fetchedResultsController.fetchedObjects else { return }
                     for listing in savedListings {
@@ -89,7 +94,6 @@ extension SavedListingViewController {
             }
         }
     }
-    
     
     private func createLayout() -> UICollectionViewLayout {
         let sectionProvider = { (sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
@@ -132,6 +136,7 @@ extension SavedListingViewController {
             cell.accessories = [.outlineDisclosure(options: headerDisclosureOption)]
         }
     }
+    
     private func configureSavedListingCell() -> UICollectionView.CellRegistration<UICollectionViewListCell, ListingItem> {
         return UICollectionView.CellRegistration<UICollectionViewListCell, ListingItem> { cell, indexPath, savedListing in
             var content = cell.defaultContentConfiguration()
@@ -147,6 +152,7 @@ extension SavedListingViewController {
             case .header(let headerItem):
                 let cell = collectionView.dequeueConfiguredReusableCell(using: self.configureHeaderCell(), for: indexPath, item: headerItem)
                 return cell
+                
             case .listing(let listing):
                 let cell = collectionView.dequeueConfiguredReusableCell(using: self.configureSavedListingCell(), for: indexPath, item: listing)
                 return cell
@@ -154,8 +160,10 @@ extension SavedListingViewController {
         }
         
     }
+    
     private func setupSnapshot(headerItems: [HeaderItem], animated: Bool = false) {
         snapshot = NSDiffableDataSourceSnapshot<HeaderItem, SavedListItem>()
+        // Append main sections
         snapshot.appendSections(headerItems)
         DispatchQueue.main.async {
             self.dataSource.apply(self.snapshot, animatingDifferences: animated)
@@ -167,6 +175,7 @@ extension SavedListingViewController {
             sectionSnapshot.append([headerListItem])
             
             let savedListItemArray = headerItem.listing.map { SavedListItem.listing($0) }
+            
             if savedListItemArray.isEmpty {
                 continue
             } else {
@@ -178,8 +187,6 @@ extension SavedListingViewController {
             }
         }
     }
-    
-
     
     private func configureHeaderData(with listings: [Listing]) {
         self.headerData.removeAll()
@@ -198,35 +205,19 @@ extension SavedListingViewController {
             listingItems.append(listingItem)
         }
         
-        let headerItems2020 = listingItems.filter { $0.year == 2020 }
-        let headerItems2019 = listingItems.filter { $0.year == 2019 }
-        let headerItems2018 = listingItems.filter { $0.year == 2018 }
-        let headerItems2017 = listingItems.filter { $0.year == 2017 }
-        let headerItems2016 = listingItems.filter { $0.year == 2016 }
-        let headerItems2015 = listingItems.filter { $0.year == 2015 }
-        let headerItems2014 = listingItems.filter { $0.year == 2014 }
-        let headerItems2013 = listingItems.filter { $0.year == 2013 }
-        let headerItems2012 = listingItems.filter { $0.year == 2012 }
-        let headerItems2011 = listingItems.filter { $0.year == 2011 }
+        // group the listings by year
+        let groupedListingItems = Dictionary(grouping: listingItems, by: { $0.year })
+
         
-        let filteredListings = [
-            headerItems2020,
-            headerItems2019,
-            headerItems2018,
-            headerItems2017,
-            headerItems2016,
-            headerItems2015,
-            headerItems2014,
-            headerItems2013,
-            headerItems2012,
-            headerItems2011]
-        
-        for filteredListing in filteredListings {
-            if filteredListing.isEmpty { continue }
-            let year = filteredListing.first?.year
-            let headerItem = HeaderItem(title: String(year!), listing: filteredListing)
+        for (_, filteredListingItems) in groupedListingItems.enumerated() {
+            // exit out of the for loop if the grouped listing is empty so that the `headerData` section is not appended
+            if filteredListingItems.value.isEmpty { continue }
+            let year = filteredListingItems.key
+            let headerItem = HeaderItem(title: String(year), listing: filteredListingItems.value)
             headerData.append(headerItem)
         }
+        
+        headerData.sort(by: { $0.title > $1.title })
   
         self.setupSnapshot(headerItems: headerData, animated: true)
     }
@@ -236,6 +227,7 @@ extension SavedListingViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
     }
+    
     func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { suggestedActions -> UIMenu? in
             guard let selectedListing = self.dataSource.itemIdentifier(for: indexPath) else { return nil }
@@ -256,7 +248,6 @@ extension SavedListingViewController: UICollectionViewDelegate {
             }
         }
     }
-    
 }
 
 extension SavedListingViewController: NSFetchedResultsControllerDelegate {

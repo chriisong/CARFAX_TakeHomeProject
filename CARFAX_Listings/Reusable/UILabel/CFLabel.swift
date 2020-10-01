@@ -30,6 +30,7 @@ class CFLabel: UILabel {
         lineBreakMode = .byWordWrapping
         drawShadow()
     }
+    
     private func drawShadow() {
         layer.shadowOpacity = 0.8
         layer.masksToBounds = false
