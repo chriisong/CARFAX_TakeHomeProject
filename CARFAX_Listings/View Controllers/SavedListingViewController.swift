@@ -8,7 +8,7 @@
 import CoreData
 import UIKit
 
-class SavedListingViewController: UIViewController {
+class SavedListingViewController: CFDataLoadingViewController {
     // MARK: Header cell data type
     struct HeaderItem: Hashable {
         let title: String
@@ -72,7 +72,9 @@ class SavedListingViewController: UIViewController {
 
 extension SavedListingViewController {
     private func fetchListings(animated: Bool = false) {
+        showLoadingView()
         NetworkManager.shared.getListing { result in
+            self.dismissLoadingView()
             switch result {
             case .failure(let error): print(error.rawValue)
             case .success(let data):

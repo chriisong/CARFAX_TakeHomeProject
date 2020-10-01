@@ -5,6 +5,7 @@
 //  Created by Chris Song on 2020-10-01.
 //
 
+import CoreData
 import UIKit
 import SafariServices
 
@@ -49,6 +50,15 @@ class DetailedListingViewController: UIViewController {
     private var numberOfPopularFeatures: Int {
         return listing.topOptions.count + listing.newTopOptions.count
     }
+    
+    // MARK: Saved Listing Core Data Provider
+    private lazy var savedListingDataProvider: SavedListingDataProvider = {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let provider = SavedListingDataProvider(
+            with: appDelegate.coreDataStack.persistentContainer,
+            fetchedResultsControllerDelegate: self)
+        return provider
+    }()
     
     init(listing: Listing) {
         super.init(nibName: nil, bundle: nil)
@@ -118,9 +128,15 @@ class DetailedListingViewController: UIViewController {
     }
     
     private func saveButtonHandler(action: UIAction) {
-        
+        guard let contains = self.savedListingDataProvider.fetchedResultsController.fetchedObjects?.contains(where: { $0.id == self.listing.id }),
+              contains == false else {
+            self.presentCFAlert(title: "Save Error", message: "You have already saved this listing.", buttonTitle: "OK")
+            return
+        }
+        self.savedListingDataProvider.saveListing(listing: self.listing) {
+            self.presentCFAlert(title: "Saved!", message: "Successfully saved this listing 🎉", buttonTitle: "OK")
+        }
     }
-    
     
     private func setupSnapshot(animated: Bool = false) {
         snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
@@ -351,5 +367,12 @@ extension DetailedListingViewController {
         safariVC.modalPresentationStyle = DeviceTypes.isiPad ? .overFullScreen : .formSheet
         safariVC.preferredControlTintColor = .systemPink
         present(safariVC, animated: true)
+    }
+}
+
+
+extension DetailedListingViewController: NSFetchedResultsControllerDelegate {
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        savedListingDataProvider.configureFetchedResultsController()
     }
 }

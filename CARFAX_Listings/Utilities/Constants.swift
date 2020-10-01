@@ -19,6 +19,10 @@ enum Image {
     static let savedTabBarImage             = UIImage(systemName: "heart.fill")!
     static let trashCircleFill              = UIImage(systemName: "trash.circle.fill")!
     static let network                      = UIImage(systemName: "network")!
+    static let techTrimIcon                 = UIImage(systemName: "star.square.fill")!
+    static let advTrimIcon                  = UIImage(systemName: "plus.square.fill")!
+    static let baseTrimIcon                 = UIImage(systemName: "minus.square.fill")!
+    static let unspecTrimIcon               = UIImage(systemName: "questionmark.square.fill")!
 }
 
 enum ScreenSize {
@@ -53,13 +57,18 @@ enum DeviceTypes {
 }
 
 enum SortOptions {
-    case priceHigh, priceLow, mileHigh, mileLow
+    case priceHigh, priceLow, mileHigh, mileLow, techTrim, baseTrim, advTrim, unspecTrim, reset
     var title: String {
         switch self {
-        case .priceHigh: return "Price High to Low"
-        case .priceLow: return "Price Low to High"
-        case .mileHigh: return "Mile High to Low"
-        case .mileLow: return "Mile Low to High"
+        case .priceHigh:    return "Price High to Low"
+        case .priceLow:     return "Price Low to High"
+        case .mileHigh:     return "Mile High to Low"
+        case .mileLow:      return "Mile Low to High"
+        case .techTrim:     return "Technology Trim"
+        case .baseTrim:     return "Base Trim"
+        case .advTrim:      return "Advanced Trim"
+        case .unspecTrim:   return "Unspecificed Trim"
+        case .reset:        return "Reset"
         }
     }
 }

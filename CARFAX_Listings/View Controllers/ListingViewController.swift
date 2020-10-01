@@ -10,7 +10,7 @@ import CoreData
 import MapKit
 import UIKit
 
-class ListingViewController: UIViewController {
+class ListingViewController: CFDataLoadingViewController {
     enum Section {
         case main
     }
@@ -19,7 +19,6 @@ class ListingViewController: UIViewController {
     private var collectionView: CFCollectionView!
     private var dataSource: UICollectionViewDiffableDataSource<Section, Listing>!
     private var snapshot: NSDiffableDataSourceSnapshot<Section, Listing>!
-    
     private var listings: [Listing] = []
     
     // MARK: Saved List Core Data Provider
@@ -35,9 +34,16 @@ class ListingViewController: UIViewController {
     private var isSearching: Bool = false
     private var filteredListings: [Listing] = []
     
+    // MARK: Loading View
+    var loadingContainerView: UIView!
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        fetchListings()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchListings()
         configureHierarchy()
         configureDataSource()
         configureNavigationBar()
@@ -46,16 +52,19 @@ class ListingViewController: UIViewController {
 }
 
 extension ListingViewController {
-    private func fetchListings() {
+    private func fetchListings(animated: Bool = false) {
+        showLoadingView()
         NetworkManager.shared.getListing { result in
+            self.dismissLoadingView()
             switch result {
             case .failure(let error): print(error.rawValue)
             case .success(let data):
                 self.listings = data.listings
-                self.setupSnapshot(filter: data.listings)
+                self.setupSnapshot(filter: data.listings, animated: animated)
             }
         }
     }
+    
     private func createLayout() -> UICollectionViewLayout {
         let sectionProvider = { (sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
             let section: NSCollectionLayoutSection
@@ -85,15 +94,34 @@ extension ListingViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         let sortByPriceHighAction = UIAction(title: SortOptions.priceHigh.title, image: Image.dollarSignSquareFill, handler: sortAction)
         let sortByPriceLowAction = UIAction(title: SortOptions.priceLow.title, image: Image.dollarSignSquareFill, handler: sortAction)
-        let sortByMileHighAction = UIAction(title: SortOptions.mileHigh.title, image: Image.arrowUpArrowDownSquareFill, handler: sortAction)
-        let sortByMileLowAction = UIAction(title: SortOptions.mileLow.title, image: Image.arrowUpArrowDownSquareFill, handler: sortAction)
+        
+        let sortByMileageHighAction = UIAction(title: SortOptions.mileHigh.title, image: Image.arrowUpArrowDownSquareFill, handler: sortAction)
+        let sortByMileageLowAction = UIAction(title: SortOptions.mileLow.title, image: Image.arrowUpArrowDownSquareFill, handler: sortAction)
+        let sortByMileageDeferredMenu = UIDeferredMenuElement({ completion in
+            completion([UIMenu(title: "", options: .displayInline, children: [sortByMileageHighAction, sortByMileageLowAction])])
+        })
+        
+        let sortByBaseAction = UIAction(title: SortOptions.baseTrim.title, image: Image.baseTrimIcon, handler: sortAction)
+        let sortByAdvAction = UIAction(title: SortOptions.advTrim.title, image: Image.advTrimIcon, handler: sortAction)
+        let sortByTechAction = UIAction(title: SortOptions.techTrim.title, image: Image.techTrimIcon, handler: sortAction)
+        let sortByUnspecAction = UIAction(title: SortOptions.unspecTrim.title, image: Image.unspecTrimIcon, handler: sortAction)
+        let sortByTrimDeferredMenu = UIDeferredMenuElement({ completion in
+            completion([UIMenu(title: "", options: .displayInline, children: [sortByBaseAction, sortByAdvAction, sortByTechAction, sortByUnspecAction])])
+        })
+        
+        let resetAction = UIAction(title: SortOptions.reset.title, attributes: .destructive, handler: sortAction)
+        let resetDeferredMenu = UIDeferredMenuElement({ completion in
+            completion([UIMenu(title: "", options: .displayInline, children: [resetAction])])
+        })
+        
         let moreButton = UIBarButtonItem(image: Image.ellipsisCircleFill,
                                          menu: UIMenu(title: "Sort Options",
                                                       children: [
                                                         sortByPriceHighAction,
                                                         sortByPriceLowAction,
-                                                        sortByMileHighAction,
-                                                        sortByMileLowAction]))
+                                                        sortByMileageDeferredMenu,
+                                                        sortByTrimDeferredMenu,
+                                                        resetDeferredMenu]))
         navigationItem.rightBarButtonItem = moreButton
     }
     
@@ -110,6 +138,30 @@ extension ListingViewController {
             
         case SortOptions.mileLow.title:
             self.listings.sort {$0.mileage < $1.mileage}
+            
+        case SortOptions.baseTrim.title:
+            let filtered = self.listings.filter { $0.trim == .base }
+            self.setupSnapshot(filter: filtered, animated: true)
+            return
+            
+        case SortOptions.advTrim.title:
+            let filtered = self.listings.filter { $0.trim == .advance }
+            self.setupSnapshot(filter: filtered, animated: true)
+            return
+            
+        case SortOptions.techTrim.title:
+            let filtered = self.listings.filter { $0.trim == .technology }
+            self.setupSnapshot(filter: filtered, animated: true)
+            return
+            
+        case SortOptions.unspecTrim.title:
+            let filtered = self.listings.filter { $0.trim == .unspecified }
+            self.setupSnapshot(filter: filtered, animated: true)
+            return
+            
+        case SortOptions.reset.title:
+            self.fetchListings(animated: true)
+            return
             
         default: break
         }
@@ -237,3 +289,5 @@ extension ListingViewController: NSFetchedResultsControllerDelegate {
         savedListingDataProvider.configureFetchedResultsController()
     }
 }
+
+

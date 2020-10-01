@@ -41,6 +41,7 @@
 		4A5AF4412525ACBD00F8DAD6 /* DetailedListingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5AF4402525ACBD00F8DAD6 /* DetailedListingViewController.swift */; };
 		4A5AF4452525E17100F8DAD6 /* Double+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5AF4442525E17100F8DAD6 /* Double+Ext.swift */; };
 		4A5AF4482525E36200F8DAD6 /* DetailedListingImageViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5AF4472525E36200F8DAD6 /* DetailedListingImageViewCell.swift */; };
+		4A5AF44B2525F9D700F8DAD6 /* CFDataLoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5AF44A2525F9D700F8DAD6 /* CFDataLoadingViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -81,6 +82,7 @@
 		4A5AF4402525ACBD00F8DAD6 /* DetailedListingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedListingViewController.swift; sourceTree = "<group>"; };
 		4A5AF4442525E17100F8DAD6 /* Double+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Ext.swift"; sourceTree = "<group>"; };
 		4A5AF4472525E36200F8DAD6 /* DetailedListingImageViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedListingImageViewCell.swift; sourceTree = "<group>"; };
+		4A5AF44A2525F9D700F8DAD6 /* CFDataLoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CFDataLoadingViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -294,6 +296,7 @@
 			isa = PBXGroup;
 			children = (
 				4A5AF430252588BC00F8DAD6 /* CFAlertViewController.swift */,
+				4A5AF44A2525F9D700F8DAD6 /* CFDataLoadingViewController.swift */,
 			);
 			path = "View Controller";
 			sourceTree = "<group>";
@@ -395,6 +398,7 @@
 				4A447DCB252518C00078304B /* CARFAXDataModel.swift in Sources */,
 				4A447DAC252515BE0078304B /* CARFAX_Listings.xcdatamodeld in Sources */,
 				4A5AF414252569F700F8DAD6 /* CFSearchController.swift in Sources */,
+				4A5AF44B2525F9D700F8DAD6 /* CFDataLoadingViewController.swift in Sources */,
 				4A5AF3E6252532FF00F8DAD6 /* CFCollectionViewCell.swift in Sources */,
 				4A5AF4482525E36200F8DAD6 /* DetailedListingImageViewCell.swift in Sources */,
 				4A5AF4062525450400F8DAD6 /* CFStackView.swift in Sources */,

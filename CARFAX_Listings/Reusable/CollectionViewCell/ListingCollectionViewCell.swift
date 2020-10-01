@@ -13,6 +13,7 @@ class ListingCollectionViewCell: CFCollectionViewCell {
     private var priceLabel: CFLabel!
     private var mileageLabel: CFLabel!
     private var locationLabel: CFLabel!
+    private var trimLabel: CFLabel!
     
     var phoneButton: CFButton!
     var mapButton: CFButton!
@@ -72,6 +73,7 @@ class ListingCollectionViewCell: CFCollectionViewCell {
         priceLabel.text = listing.currentPrice.currency()
         mileageLabel.text = listing.mileage.withComma() + " miles"
         locationLabel.text = listingDealerLocation
+        trimLabel.text = "Trim: " + listing.trim.rawValue
     }
     
     private func configurePhoneButton() {
@@ -87,17 +89,19 @@ class ListingCollectionViewCell: CFCollectionViewCell {
     }
     
     private func configureLabels() {
-        carMakeLabel = CFLabel(frame: bounds, font: UIFont.preferredFont(forTextStyle: .title3).bold(), textColor: .white)
-        priceLabel = CFLabel(frame: bounds, font: UIFont.preferredFont(forTextStyle: .headline).bold(), textColor: .white)
+        carMakeLabel = CFLabel(frame: bounds, font: UIFont.preferredFont(forTextStyle: .title1).bold(), textColor: .white)
+        priceLabel = CFLabel(frame: bounds, font: UIFont.preferredFont(forTextStyle: .title3).bold(), textColor: .white)
         mileageLabel = CFLabel(frame: bounds, font: UIFont.preferredFont(forTextStyle: .headline), textColor: .white)
         locationLabel = CFLabel(frame: bounds, font: UIFont.preferredFont(forTextStyle: .headline), textColor: .white)
+        trimLabel = CFLabel(frame: bounds, font: UIFont.preferredFont(forTextStyle: .subheadline).bold(), textColor: .white)
     }
     
     private func configureStackViews() {
-        labelStackView = CFStackView(frame: bounds, axis: .vertical, spacing: 5, distribution: .fill)
+        labelStackView = CFStackView(frame: bounds, axis: .vertical, spacing: 3, distribution: .fill)
         buttonStackView = CFStackView(frame: bounds, axis: .vertical, spacing: 5, distribution: .fillEqually)
         
         labelStackView.addArrangedSubview(carMakeLabel)
+        labelStackView.addArrangedSubview(trimLabel)
         labelStackView.addArrangedSubview(priceLabel)
         labelStackView.addArrangedSubview(mileageLabel)
         labelStackView.addArrangedSubview(locationLabel)
