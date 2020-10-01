@@ -13,11 +13,13 @@ class HomeViewController: UIViewController {
     }
     
     enum SortOptions {
-        case priceHigh, priceLow
+        case priceHigh, priceLow, mileHigh, mileLow
         var title: String {
             switch self {
             case .priceHigh: return "Price High to Low"
             case .priceLow: return "Price Low to High"
+            case .mileHigh: return "Mile High to Low"
+            case .mileLow: return "Mile Low to High"
             }
         }
     }
@@ -82,9 +84,17 @@ extension HomeViewController {
         navigationItem.title = "Listings"
         navigationItem.largeTitleDisplayMode = .always
         navigationController?.navigationBar.prefersLargeTitles = true
-        let sortByPriceHighAction = UIAction(title: SortOptions.priceHigh.title, image: Image.arrowUpArrowDownSquareFill, handler: sortAction)
-        let sortByPriceLowAction = UIAction(title: SortOptions.priceLow.title, image: Image.arrowUpArrowDownSquareFill, handler: sortAction)
-        let moreButton = UIBarButtonItem(title: "", image: Image.ellipsisCircleFill, menu: UIMenu(title: "Sort Options", children: [sortByPriceHighAction, sortByPriceLowAction]))
+        let sortByPriceHighAction = UIAction(title: SortOptions.priceHigh.title, image: Image.dollarSignSquareFill, handler: sortAction)
+        let sortByPriceLowAction = UIAction(title: SortOptions.priceLow.title, image: Image.dollarSignSquareFill, handler: sortAction)
+        let sortByMileHighAction = UIAction(title: SortOptions.mileHigh.title, image: Image.arrowUpArrowDownSquareFill, handler: sortAction)
+        let sortByMileLowAction = UIAction(title: SortOptions.mileLow.title, image: Image.arrowUpArrowDownSquareFill, handler: sortAction)
+        let moreButton = UIBarButtonItem(image: Image.ellipsisCircleFill,
+                                         menu: UIMenu(title: "Sort Options",
+                                                      children: [
+                                                        sortByPriceHighAction,
+                                                        sortByPriceLowAction,
+                                                        sortByMileHighAction,
+                                                        sortByMileLowAction]))
         navigationItem.rightBarButtonItem = moreButton
     }
     
@@ -92,9 +102,15 @@ extension HomeViewController {
         switch action.title {
         case SortOptions.priceHigh.title:
             self.listings.sort {$0.listPrice > $1.listPrice}
-            
+        case SortOptions.priceLow.title:
+            self.listings.sort {$0.listPrice < $1.listPrice}
+        case SortOptions.mileHigh.title:
+            self.listings.sort {$0.mileage > $1.mileage}
+        case SortOptions.mileLow.title:
+            self.listings.sort {$0.mileage < $1.mileage}
         default: break
         }
+        self.setupSnapshot(filter: self.listings)
     }
     
     private func configureCell() -> UICollectionView.CellRegistration<ListingCollectionViewCell, Listing> {
@@ -103,12 +119,20 @@ extension HomeViewController {
         }
     }
     
+    private func phoneButtonPressed(for indexPath: IndexPath) {
+        
+    }
+    private func mapButtonPressed(for indexPath: IndexPath) {
+        
+    }
+    
     private func configureDataSource() {
         dataSource = UICollectionViewDiffableDataSource<Section, Listing>(collectionView: collectionView) { collectionView, indexPath, listing -> UICollectionViewCell? in
             return collectionView.dequeueConfiguredReusableCell(using: self.configureCell(), for: indexPath, item: listing)
         }
         setupSnapshot(filter: self.listings)
     }
+    
     private func setupSnapshot(filter: [Listing], animated: Bool = false) {
         snapshot = NSDiffableDataSourceSnapshot<Section, Listing>()
         snapshot.appendSections([.main])

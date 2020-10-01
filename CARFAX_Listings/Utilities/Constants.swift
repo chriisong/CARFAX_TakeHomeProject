@@ -13,6 +13,7 @@ enum Image {
     static let mapIcon = UIImage(systemName: "location", withConfiguration: UIImage.SymbolConfiguration(weight: .bold))!
     static let ellipsisCircleFill = UIImage(systemName: "ellipsis.circle.fill")!
     static let arrowUpArrowDownSquareFill = UIImage(systemName: "arrow.up.arrow.down.square.fill")!
+    static let dollarSignSquareFill = UIImage(systemName: "dollarsign.square.fill")!
 }
 
 enum ScreenSize {

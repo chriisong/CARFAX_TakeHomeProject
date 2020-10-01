@@ -13,8 +13,9 @@ class ListingCollectionViewCell: CFCollectionViewCell {
     private var priceLabel: CFLabel!
     private var mileageLabel: CFLabel!
     private var locationLabel: CFLabel!
-    private var phoneButton: CFButton!
-    private var mapButton: CFButton!
+    
+    var phoneButton: CFButton!
+    var mapButton: CFButton!
     
     private var labelStackView: CFStackView!
     private var buttonStackView: CFStackView!
