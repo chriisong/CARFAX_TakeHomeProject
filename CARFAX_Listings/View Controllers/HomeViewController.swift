@@ -5,6 +5,8 @@
 //  Created by Chris Song on 2020-09-30.
 //
 
+import Contacts
+import MapKit
 import UIKit
 
 class HomeViewController: UIViewController {
@@ -116,14 +118,38 @@ extension HomeViewController {
     private func configureCell() -> UICollectionView.CellRegistration<ListingCollectionViewCell, Listing> {
         return UICollectionView.CellRegistration<ListingCollectionViewCell, Listing> { cell, indexPath, listing in
             cell.set(with: listing)
+            cell.phoneButton.buttonAction {
+                self.phoneButtonPressed(for: listing, at: indexPath)
+            }
+            cell.mapButton.buttonAction {
+                self.mapButtonPressed(for: listing, at: indexPath)
+            }
         }
     }
     
-    private func phoneButtonPressed(for indexPath: IndexPath) {
-        
+    private func phoneButtonPressed(for listing: Listing, at indexPath: IndexPath) {
+        let phoneNumber = listing.dealer.phone
+        guard let url = URL(string: "tel://\(phoneNumber)") else {
+            return
+        }
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
-    private func mapButtonPressed(for indexPath: IndexPath) {
-        
+    private func mapButtonPressed(for listing: Listing, at indexPath: IndexPath) {
+        let address = CNMutablePostalAddress()
+        address.street = listing.dealer.address
+        address.city = listing.dealer.city
+        address.state = listing.dealer.state.rawValue
+        address.postalCode = listing.dealer.zip
+        address.country = "USA"
+        let geoloc = CLGeocoder()
+        geoloc.geocodePostalAddress(address) { placemarks, _ in
+            guard let placemark = placemarks?.first else {
+                return
+            }
+            let mkPlacemark = MKPlacemark(placemark: placemark)
+            let mapItem = MKMapItem(placemark: mkPlacemark)
+            mapItem.openInMaps(launchOptions: nil)
+        }
     }
     
     private func configureDataSource() {
