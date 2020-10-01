@@ -8,7 +8,7 @@
 import UIKit
 
 class CFLabel: UILabel {
-    init(frame: CGRect, font: UIFont, textColor: UIColor) {
+    init(frame: CGRect, font: UIFont, textColor: UIColor, withShadow: Bool = true) {
         super.init(frame: frame)
         let descriptor = font.fontDescriptor
         if let rounded = descriptor.withDesign(.rounded) {
@@ -19,19 +19,20 @@ class CFLabel: UILabel {
             self.textColor = textColor
         }
         self.textAlignment = .left
-        configure()
+        configure(withShadow: withShadow)
     }
     required init?(coder: NSCoder) { fatalError("") }
     
-    private func configure() {
+    private func configure(withShadow: Bool) {
         translatesAutoresizingMaskIntoConstraints = false
         adjustsFontForContentSizeCategory = true
         numberOfLines = 0
         lineBreakMode = .byWordWrapping
-        drawShadow()
+        drawShadow(withShadow: withShadow)
     }
     
-    private func drawShadow() {
+    private func drawShadow(withShadow: Bool) {
+        guard withShadow else { return }
         layer.shadowOpacity = 0.8
         layer.masksToBounds = false
         clipsToBounds = false

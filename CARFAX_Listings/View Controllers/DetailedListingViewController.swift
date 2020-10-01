@@ -14,6 +14,24 @@ class DetailedListingViewController: UIViewController {
         private let identifier = UUID()
     }
     
+    enum ListingSavedState {
+        case saved, unsaved
+        
+        var buttonTitle: String {
+            switch self {
+            case .saved: return "Remove Listing"
+            case .unsaved: return "Save Listing"
+            }
+        }
+        
+        var buttonImage: UIImage {
+            switch self {
+            case .saved: return Image.trashCircleFill
+            case .unsaved: return Image.arrowDownHeartFill
+            }
+        }
+    }
+    
     enum Section: Int, Hashable, CaseIterable, CustomStringConvertible {
         case images = 0, overview, vehicleInfo, popularFeatures, ownerHistory, monthlyPaymentEstimate, dealer
         
@@ -60,6 +78,8 @@ class DetailedListingViewController: UIViewController {
         return provider
     }()
     
+    private var listingSavedState: ListingSavedState!
+    
     init(listing: Listing) {
         super.init(nibName: nil, bundle: nil)
         self.listing = listing
@@ -68,6 +88,7 @@ class DetailedListingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureSavedState()
         configureHierarchy()
         configureNavigationBar()
         configureDataSource()
@@ -107,13 +128,20 @@ class DetailedListingViewController: UIViewController {
         view.addSubview(collectionView)
     }
     
+    private func configureSavedState() {
+        guard let contains = self.savedListingDataProvider.fetchedResultsController.fetchedObjects?.contains(where: { $0.id == self.listing.id }) else {
+            return
+        }
+        listingSavedState = contains ? .saved : .unsaved
+    }
+    
     private func configureNavigationBar() {
         let year = String(listing.year)
         let title = "\(year) \(listing.make.rawValue) \(listing.model)"
         navigationItem.title = title
         navigationItem.largeTitleDisplayMode = .always
         navigationController?.navigationBar.prefersLargeTitles = true
-        let saveAction = UIAction(title: "Save Listing", image: Image.arrowDownHeartFill, handler: saveButtonHandler)
+        let saveAction = UIAction(title: listingSavedState.buttonTitle, image: listingSavedState.buttonImage, handler: saveButtonHandler)
         let websiteAction = UIAction(title: "Visit Listing Website", image: Image.network, handler: websiteButtonHandler)
         let moreButton = UIBarButtonItem(image: Image.ellipsisCircleFill, menu: UIMenu(title: "", children: [saveAction, websiteAction]))
         navigationItem.rightBarButtonItem = moreButton
@@ -128,21 +156,23 @@ class DetailedListingViewController: UIViewController {
     }
     
     private func saveButtonHandler(action: UIAction) {
-        guard let contains = self.savedListingDataProvider.fetchedResultsController.fetchedObjects?.contains(where: { $0.id == self.listing.id }),
-              contains == false else {
-            self.presentCFAlert(title: "Save Error", message: "You have already saved this listing.", buttonTitle: "OK")
-            return
-        }
-        self.savedListingDataProvider.saveListing(listing: self.listing) {
-            self.presentCFAlert(title: "Saved!", message: "Successfully saved this listing 🎉", buttonTitle: "OK")
+        switch listingSavedState {
+        case .saved:
+            guard let listing = self.savedListingDataProvider.fetchedResultsController.fetchedObjects?.first(where: { $0.id == self.listing.id }) else { return }
+            self.savedListingDataProvider.removeListing(listingToRemove: listing) {
+                self.presentCFAlert(title: "Removed!", message: "Successfully removed this listing 🎉", buttonTitle: "OK")
+            }
+        case .unsaved:
+            self.savedListingDataProvider.saveListing(listing: self.listing) {
+                self.presentCFAlert(title: "Saved!", message: "Successfully saved this listing 🎉", buttonTitle: "OK")
+            }
+        default: break
         }
     }
     
     private func setupSnapshot(animated: Bool = false) {
         snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
-//        let rows = Array(1..<self.listing.imageCount).map { _ in Item()}
         snapshot.appendSections(Section.allCases)
-//        snapshot.appendItems(rows, toSection: .images)
         DispatchQueue.main.async {
             self.dataSource.apply(self.snapshot, animatingDifferences: animated)
         }
@@ -374,5 +404,7 @@ extension DetailedListingViewController {
 extension DetailedListingViewController: NSFetchedResultsControllerDelegate {
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         savedListingDataProvider.configureFetchedResultsController()
+        configureSavedState()
+        configureNavigationBar()
     }
 }

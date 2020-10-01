@@ -49,8 +49,8 @@ class CFAlertContainerView: UIView {
     }
     
     private func configureForAlert() {
-        titleLabel = CFLabel(frame: bounds, font: UIFont.preferredFont(forTextStyle: .title3).bold(), textColor: .label)
-        messageLabel = CFLabel(frame: bounds, font: UIFont.preferredFont(forTextStyle: .body), textColor: .label)
+        titleLabel = CFLabel(frame: bounds, font: UIFont.preferredFont(forTextStyle: .title1).bold(), textColor: .label, withShadow: false)
+        messageLabel = CFLabel(frame: bounds, font: UIFont.preferredFont(forTextStyle: .body), textColor: .label, withShadow: false)
         actionButton = CFButton(frame: bounds)
         
         titleLabel.textAlignment = .center
