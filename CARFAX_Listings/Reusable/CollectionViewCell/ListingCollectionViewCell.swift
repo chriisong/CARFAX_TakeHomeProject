@@ -41,12 +41,12 @@ class ListingCollectionViewCell: CFCollectionViewCell {
             carImageView.widthAnchor.constraint(equalTo: widthAnchor),
             carImageView.heightAnchor.constraint(equalToConstant: 300),
             
-            labelStackView.topAnchor.constraint(equalTo: carImageView.bottomAnchor, constant: inset * 2),
+            labelStackView.topAnchor.constraint(equalTo: carImageView.bottomAnchor, constant: inset),
             labelStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: inset),
             labelStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -inset),
             labelStackView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.65),
             
-            buttonStackView.topAnchor.constraint(equalTo: carImageView.bottomAnchor, constant: inset * 2),
+            buttonStackView.topAnchor.constraint(equalTo: carImageView.bottomAnchor, constant: inset),
             buttonStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -inset),
             buttonStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -inset),
             buttonStackView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: DeviceTypes.isiPad ? 0.1 : 0.3)

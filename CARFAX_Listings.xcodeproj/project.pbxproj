@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		4A447DA2252515BE0078304B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A447DA1252515BE0078304B /* AppDelegate.swift */; };
 		4A447DA4252515BE0078304B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A447DA3252515BE0078304B /* SceneDelegate.swift */; };
-		4A447DA6252515BE0078304B /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A447DA5252515BE0078304B /* HomeViewController.swift */; };
+		4A447DA6252515BE0078304B /* ListingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A447DA5252515BE0078304B /* ListingViewController.swift */; };
 		4A447DAC252515BE0078304B /* CARFAX_Listings.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4A447DAA252515BE0078304B /* CARFAX_Listings.xcdatamodeld */; };
 		4A447DAE252515BE0078304B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A447DAD252515BE0078304B /* Assets.xcassets */; };
 		4A447DB1252515BE0078304B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A447DAF252515BE0078304B /* LaunchScreen.storyboard */; };
@@ -28,13 +28,19 @@
 		4A5AF4062525450400F8DAD6 /* CFStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5AF4052525450400F8DAD6 /* CFStackView.swift */; };
 		4A5AF40A2525498A00F8DAD6 /* Int+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5AF4092525498A00F8DAD6 /* Int+Ext.swift */; };
 		4A5AF414252569F700F8DAD6 /* CFSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5AF413252569F700F8DAD6 /* CFSearchController.swift */; };
+		4A5AF41825257C6300F8DAD6 /* SavedListing+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5AF41625257C6300F8DAD6 /* SavedListing+CoreDataClass.swift */; };
+		4A5AF41925257C6300F8DAD6 /* SavedListing+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5AF41725257C6300F8DAD6 /* SavedListing+CoreDataProperties.swift */; };
+		4A5AF41C25257C9B00F8DAD6 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5AF41B25257C9B00F8DAD6 /* CoreDataManager.swift */; };
+		4A5AF42225257D0E00F8DAD6 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A5AF42125257D0E00F8DAD6 /* CloudKit.framework */; };
+		4A5AF42525257DCB00F8DAD6 /* SavedListingDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5AF42425257DCB00F8DAD6 /* SavedListingDataProvider.swift */; };
+		4A5AF4292525807900F8DAD6 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5AF4282525807900F8DAD6 /* MainTabBarController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		4A447D9E252515BE0078304B /* CARFAX_Listings.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CARFAX_Listings.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A447DA1252515BE0078304B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4A447DA3252515BE0078304B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		4A447DA5252515BE0078304B /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		4A447DA5252515BE0078304B /* ListingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingViewController.swift; sourceTree = "<group>"; };
 		4A447DAB252515BE0078304B /* CARFAX_Listings.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CARFAX_Listings.xcdatamodel; sourceTree = "<group>"; };
 		4A447DAD252515BE0078304B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4A447DB0252515BE0078304B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -54,6 +60,13 @@
 		4A5AF4052525450400F8DAD6 /* CFStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CFStackView.swift; sourceTree = "<group>"; };
 		4A5AF4092525498A00F8DAD6 /* Int+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Ext.swift"; sourceTree = "<group>"; };
 		4A5AF413252569F700F8DAD6 /* CFSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CFSearchController.swift; sourceTree = "<group>"; };
+		4A5AF41625257C6300F8DAD6 /* SavedListing+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SavedListing+CoreDataClass.swift"; sourceTree = "<group>"; };
+		4A5AF41725257C6300F8DAD6 /* SavedListing+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SavedListing+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		4A5AF41B25257C9B00F8DAD6 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		4A5AF41E25257D0A00F8DAD6 /* CARFAX_Listings.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CARFAX_Listings.entitlements; sourceTree = "<group>"; };
+		4A5AF42125257D0E00F8DAD6 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		4A5AF42425257DCB00F8DAD6 /* SavedListingDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedListingDataProvider.swift; sourceTree = "<group>"; };
+		4A5AF4282525807900F8DAD6 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A5AF42225257D0E00F8DAD6 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,6 +86,7 @@
 			children = (
 				4A447DA0252515BE0078304B /* CARFAX_Listings */,
 				4A447D9F252515BE0078304B /* Products */,
+				4A5AF42025257D0E00F8DAD6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -86,6 +101,7 @@
 		4A447DA0252515BE0078304B /* CARFAX_Listings */ = {
 			isa = PBXGroup;
 			children = (
+				4A5AF41E25257D0A00F8DAD6 /* CARFAX_Listings.entitlements */,
 				4A447DB2252515BE0078304B /* Info.plist */,
 				4A447DBF2525174F0078304B /* View Controllers */,
 				4A447DBC252517410078304B /* Model */,
@@ -103,6 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				4A447DC32525180E0078304B /* NetworkManager.swift */,
+				4A5AF41B25257C9B00F8DAD6 /* CoreDataManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -130,6 +147,9 @@
 		4A447DBD252517450078304B /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
+				4A5AF42325257DC200F8DAD6 /* Data Provider */,
+				4A5AF41625257C6300F8DAD6 /* SavedListing+CoreDataClass.swift */,
+				4A5AF41725257C6300F8DAD6 /* SavedListing+CoreDataProperties.swift */,
 			);
 			path = "Core Data";
 			sourceTree = "<group>";
@@ -146,7 +166,8 @@
 		4A447DBF2525174F0078304B /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				4A447DA5252515BE0078304B /* HomeViewController.swift */,
+				4A447DA5252515BE0078304B /* ListingViewController.swift */,
+				4A5AF4282525807900F8DAD6 /* MainTabBarController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -232,6 +253,22 @@
 			path = SearchController;
 			sourceTree = "<group>";
 		};
+		4A5AF42025257D0E00F8DAD6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4A5AF42125257D0E00F8DAD6 /* CloudKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4A5AF42325257DC200F8DAD6 /* Data Provider */ = {
+			isa = PBXGroup;
+			children = (
+				4A5AF42425257DCB00F8DAD6 /* SavedListingDataProvider.swift */,
+			);
+			path = "Data Provider";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -301,14 +338,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A5AF41825257C6300F8DAD6 /* SavedListing+CoreDataClass.swift in Sources */,
 				4A5AF4022525439F00F8DAD6 /* UIView+Ext.swift in Sources */,
+				4A5AF4292525807900F8DAD6 /* MainTabBarController.swift in Sources */,
 				4A5AF3FA2525426E00F8DAD6 /* UIFont+Ext.swift in Sources */,
 				4A5AF3F12525408600F8DAD6 /* CFListingImageView.swift in Sources */,
-				4A447DA6252515BE0078304B /* HomeViewController.swift in Sources */,
+				4A447DA6252515BE0078304B /* ListingViewController.swift in Sources */,
 				4A5AF3F6252541AD00F8DAD6 /* CFButton.swift in Sources */,
+				4A5AF41925257C6300F8DAD6 /* SavedListing+CoreDataProperties.swift in Sources */,
 				4A5AF40A2525498A00F8DAD6 /* Int+Ext.swift in Sources */,
+				4A5AF42525257DCB00F8DAD6 /* SavedListingDataProvider.swift in Sources */,
 				4A5AF3ED2525400D00F8DAD6 /* Constants.swift in Sources */,
 				4A5AF3E125252BF600F8DAD6 /* CFCollectionView.swift in Sources */,
+				4A5AF41C25257C9B00F8DAD6 /* CoreDataManager.swift in Sources */,
 				4A447DCB252518C00078304B /* CARFAXDataModel.swift in Sources */,
 				4A447DAC252515BE0078304B /* CARFAX_Listings.xcdatamodeld in Sources */,
 				4A5AF414252569F700F8DAD6 /* CFSearchController.swift in Sources */,
@@ -458,6 +500,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = CARFAX_Listings/CARFAX_Listings.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = FZ38NK37NP;
 				INFOPLIST_FILE = CARFAX_Listings/Info.plist;
@@ -477,6 +520,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = CARFAX_Listings/CARFAX_Listings.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = FZ38NK37NP;
 				INFOPLIST_FILE = CARFAX_Listings/Info.plist;

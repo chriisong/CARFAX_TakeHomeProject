@@ -6,6 +6,7 @@
 //
 
 import Contacts
+import CoreData
 import MapKit
 import UIKit
 
@@ -14,23 +15,21 @@ class HomeViewController: UIViewController {
         case main
     }
     
-    enum SortOptions {
-        case priceHigh, priceLow, mileHigh, mileLow
-        var title: String {
-            switch self {
-            case .priceHigh: return "Price High to Low"
-            case .priceLow: return "Price Low to High"
-            case .mileHigh: return "Mile High to Low"
-            case .mileLow: return "Mile Low to High"
-            }
-        }
-    }
+
     
     private var collectionView: CFCollectionView!
     private var dataSource: UICollectionViewDiffableDataSource<Section, Listing>!
     private var snapshot: NSDiffableDataSourceSnapshot<Section, Listing>!
     
     private var listings: [Listing] = []
+    
+    private lazy var savedListingDataProvider: SavedListingDataProvider = {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let provider = SavedListingDataProvider(
+            with: appDelegate.coreDataStack.persistentContainer,
+            fetchedResultsControllerDelegate: nil)
+        return provider
+    }()
     
     // MARK: Search
     private var isSearching: Bool = false
@@ -63,7 +62,7 @@ extension HomeViewController {
         let sectionProvider = { (sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
             let section: NSCollectionLayoutSection
             
-            let size = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(300))
+            let size = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(400))
             let item = NSCollectionLayoutItem(layoutSize: size)
             
             let group = NSCollectionLayoutGroup.horizontal(layoutSize: size, subitem: item, count: 1)
@@ -112,7 +111,7 @@ extension HomeViewController {
             self.listings.sort {$0.mileage < $1.mileage}
         default: break
         }
-        self.setupSnapshot(filter: self.listings)
+        self.setupSnapshot(filter: self.listings, animated: true)
     }
     
     private func configureCell() -> UICollectionView.CellRegistration<ListingCollectionViewCell, Listing> {
@@ -178,6 +177,19 @@ extension HomeViewController {
 extension HomeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
+    }
+    func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { suggestedActions -> UIMenu? in
+            let saveAction = UIAction(title: "Save", image: Image.arrowDownHeartFill) { (action) in
+                guard let selectedListing = self.dataSource.itemIdentifier(for: indexPath) else { return }
+                self.savedListingDataProvider.saveListing(listing: selectedListing) {
+                    print("saved!")
+                }
+            }
+            let children: [UIMenuElement] = [saveAction]
+            let menu = UIMenu(title: "", image: nil, identifier: nil, options: .displayInline, children: children)
+            return menu
+        }
     }
 }
 extension HomeViewController: UISearchResultsUpdating {

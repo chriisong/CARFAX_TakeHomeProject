@@ -14,6 +14,7 @@ enum Image {
     static let ellipsisCircleFill = UIImage(systemName: "ellipsis.circle.fill")!
     static let arrowUpArrowDownSquareFill = UIImage(systemName: "arrow.up.arrow.down.square.fill")!
     static let dollarSignSquareFill = UIImage(systemName: "dollarsign.square.fill")!
+    static let arrowDownHeartFill = UIImage(systemName: "arrow.down.heart.fill")!
 }
 
 enum ScreenSize {
@@ -45,4 +46,16 @@ enum DeviceTypes {
     static let isiPadLandScapeMode = (isiPad && orientation == .landscapeRight) || (isiPad && orientation == .landscapeLeft)
     static let isLandscape = orientation.isLandscape
     static let isPortrait = orientation.isPortrait
+}
+
+enum SortOptions {
+    case priceHigh, priceLow, mileHigh, mileLow
+    var title: String {
+        switch self {
+        case .priceHigh: return "Price High to Low"
+        case .priceLow: return "Price Low to High"
+        case .mileHigh: return "Mile High to Low"
+        case .mileLow: return "Mile Low to High"
+        }
+    }
 }
