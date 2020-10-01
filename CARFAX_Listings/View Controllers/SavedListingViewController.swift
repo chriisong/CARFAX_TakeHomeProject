@@ -33,7 +33,7 @@ class SavedListingViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        fetchListings(animated: true)
+        fetchListings(animated: false)
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +42,6 @@ class SavedListingViewController: UIViewController {
         configureNavigationBar()
         configureSearchController()
     }
-    
 }
 
 extension SavedListingViewController {
@@ -160,7 +159,7 @@ extension SavedListingViewController: UICollectionViewDelegate {
                 if let savedListing = self.savedListingDataProvider.fetchedResultsController.fetchedObjects?.first(where: { $0.id == selectedListing.id }) {
                     self.savedListingDataProvider.removeListing(listingToRemove: savedListing) {
                         self.fetchListings(animated: true)
-                        print("removed!")
+                        self.presentCFAlert(title: "Removed!", message: "Successfully removed this listing 🎉", buttonTitle: "OK")
                     }
                 }
             }

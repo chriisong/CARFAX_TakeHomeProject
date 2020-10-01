@@ -56,7 +56,6 @@ class CFAlertContainerView: UIView {
         titleLabel.textAlignment = .center
         messageLabel.textAlignment = .center
         actionButton.backgroundColor = .systemPink
-        actionButton.setTitle("OK", for: .normal)
         
         addSubview(titleLabel)
         addSubview(messageLabel)

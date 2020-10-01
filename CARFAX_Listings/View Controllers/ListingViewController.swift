@@ -25,7 +25,7 @@ class ListingViewController: UIViewController {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let provider = SavedListingDataProvider(
             with: appDelegate.coreDataStack.persistentContainer,
-            fetchedResultsControllerDelegate: nil)
+            fetchedResultsControllerDelegate: self)
         return provider
     }()
     
@@ -182,10 +182,11 @@ extension ListingViewController: UICollectionViewDelegate {
                 guard let selectedListing = self.dataSource.itemIdentifier(for: indexPath) else { return }
                 guard let contains = self.savedListingDataProvider.fetchedResultsController.fetchedObjects?.contains(where: { $0.id == selectedListing.id }),
                       contains == false else {
+                    self.presentCFAlert(title: "Save Error", message: "You have already saved this listing.", buttonTitle: "OK")
                     return
                 }
                 self.savedListingDataProvider.saveListing(listing: selectedListing) {
-                    
+                    self.presentCFAlert(title: "Saved!", message: "Successfully saved this listing 🎉", buttonTitle: "OK")
                 }
             }
             let children: [UIMenuElement] = [saveAction]
@@ -212,5 +213,11 @@ extension ListingViewController: UISearchResultsUpdating {
                 || $0.dealer.name.lowercased().contains(filter.lowercased())
         }
         setupSnapshot(filter: filteredListings, animated: true)
+    }
+}
+
+extension ListingViewController: NSFetchedResultsControllerDelegate {
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        savedListingDataProvider.configureFetchedResultsController()
     }
 }

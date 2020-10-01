@@ -20,7 +20,7 @@ class SavedListingDataProvider {
         configureFetchedResultsController()
     }
     
-    private func configureFetchedResultsController() {
+    func configureFetchedResultsController() {
         let fetchRequest = SavedListing.fetch()
         let sort = NSSortDescriptor(key: "id", ascending: false)
         fetchRequest.sortDescriptors = [sort]
