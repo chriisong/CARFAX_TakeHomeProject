@@ -9,20 +9,32 @@
 /* Begin PBXBuildFile section */
 		4A447DA2252515BE0078304B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A447DA1252515BE0078304B /* AppDelegate.swift */; };
 		4A447DA4252515BE0078304B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A447DA3252515BE0078304B /* SceneDelegate.swift */; };
-		4A447DA6252515BE0078304B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A447DA5252515BE0078304B /* ViewController.swift */; };
+		4A447DA6252515BE0078304B /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A447DA5252515BE0078304B /* HomeViewController.swift */; };
 		4A447DAC252515BE0078304B /* CARFAX_Listings.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4A447DAA252515BE0078304B /* CARFAX_Listings.xcdatamodeld */; };
 		4A447DAE252515BE0078304B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A447DAD252515BE0078304B /* Assets.xcassets */; };
 		4A447DB1252515BE0078304B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A447DAF252515BE0078304B /* LaunchScreen.storyboard */; };
 		4A447DC42525180E0078304B /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A447DC32525180E0078304B /* NetworkManager.swift */; };
 		4A447DC82525187E0078304B /* CFError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A447DC72525187E0078304B /* CFError.swift */; };
 		4A447DCB252518C00078304B /* CARFAXDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A447DCA252518C00078304B /* CARFAXDataModel.swift */; };
+		4A5AF3E125252BF600F8DAD6 /* CFCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5AF3E025252BF600F8DAD6 /* CFCollectionView.swift */; };
+		4A5AF3E6252532FF00F8DAD6 /* CFCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5AF3E5252532FF00F8DAD6 /* CFCollectionViewCell.swift */; };
+		4A5AF3EA252536F500F8DAD6 /* ListingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5AF3E9252536F500F8DAD6 /* ListingCollectionViewCell.swift */; };
+		4A5AF3ED2525400D00F8DAD6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5AF3EC2525400D00F8DAD6 /* Constants.swift */; };
+		4A5AF3F12525408600F8DAD6 /* CFListingImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5AF3F02525408600F8DAD6 /* CFListingImageView.swift */; };
+		4A5AF3F6252541AD00F8DAD6 /* CFButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5AF3F5252541AD00F8DAD6 /* CFButton.swift */; };
+		4A5AF3FA2525426E00F8DAD6 /* UIFont+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5AF3F92525426E00F8DAD6 /* UIFont+Ext.swift */; };
+		4A5AF3FE2525428900F8DAD6 /* CFLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5AF3FD2525428900F8DAD6 /* CFLabel.swift */; };
+		4A5AF4022525439F00F8DAD6 /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5AF4012525439F00F8DAD6 /* UIView+Ext.swift */; };
+		4A5AF4062525450400F8DAD6 /* CFStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5AF4052525450400F8DAD6 /* CFStackView.swift */; };
+		4A5AF40A2525498A00F8DAD6 /* Int+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5AF4092525498A00F8DAD6 /* Int+Ext.swift */; };
+		4A5AF414252569F700F8DAD6 /* CFSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5AF413252569F700F8DAD6 /* CFSearchController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		4A447D9E252515BE0078304B /* CARFAX_Listings.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CARFAX_Listings.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A447DA1252515BE0078304B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4A447DA3252515BE0078304B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		4A447DA5252515BE0078304B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		4A447DA5252515BE0078304B /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		4A447DAB252515BE0078304B /* CARFAX_Listings.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CARFAX_Listings.xcdatamodel; sourceTree = "<group>"; };
 		4A447DAD252515BE0078304B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4A447DB0252515BE0078304B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -30,6 +42,18 @@
 		4A447DC32525180E0078304B /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		4A447DC72525187E0078304B /* CFError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CFError.swift; sourceTree = "<group>"; };
 		4A447DCA252518C00078304B /* CARFAXDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CARFAXDataModel.swift; sourceTree = "<group>"; };
+		4A5AF3E025252BF600F8DAD6 /* CFCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CFCollectionView.swift; sourceTree = "<group>"; };
+		4A5AF3E5252532FF00F8DAD6 /* CFCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CFCollectionViewCell.swift; sourceTree = "<group>"; };
+		4A5AF3E9252536F500F8DAD6 /* ListingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingCollectionViewCell.swift; sourceTree = "<group>"; };
+		4A5AF3EC2525400D00F8DAD6 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		4A5AF3F02525408600F8DAD6 /* CFListingImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CFListingImageView.swift; sourceTree = "<group>"; };
+		4A5AF3F5252541AD00F8DAD6 /* CFButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CFButton.swift; sourceTree = "<group>"; };
+		4A5AF3F92525426E00F8DAD6 /* UIFont+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Ext.swift"; sourceTree = "<group>"; };
+		4A5AF3FD2525428900F8DAD6 /* CFLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CFLabel.swift; sourceTree = "<group>"; };
+		4A5AF4012525439F00F8DAD6 /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
+		4A5AF4052525450400F8DAD6 /* CFStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CFStackView.swift; sourceTree = "<group>"; };
+		4A5AF4092525498A00F8DAD6 /* Int+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Ext.swift"; sourceTree = "<group>"; };
+		4A5AF413252569F700F8DAD6 /* CFSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CFSearchController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				4A447DC72525187E0078304B /* CFError.swift */,
+				4A5AF3EC2525400D00F8DAD6 /* Constants.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -121,7 +146,7 @@
 		4A447DBF2525174F0078304B /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				4A447DA5252515BE0078304B /* ViewController.swift */,
+				4A447DA5252515BE0078304B /* HomeViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -129,6 +154,9 @@
 		4A447DC0252517540078304B /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				4A5AF3F92525426E00F8DAD6 /* UIFont+Ext.swift */,
+				4A5AF4012525439F00F8DAD6 /* UIView+Ext.swift */,
+				4A5AF4092525498A00F8DAD6 /* Int+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -136,8 +164,72 @@
 		4A447DC1252517580078304B /* Reusable */ = {
 			isa = PBXGroup;
 			children = (
+				4A5AF412252569EE00F8DAD6 /* SearchController */,
+				4A5AF404252544FE00F8DAD6 /* StackView */,
+				4A5AF3FC2525428300F8DAD6 /* UILabel */,
+				4A5AF3F4252541A200F8DAD6 /* UIButton */,
+				4A5AF3EF2525407D00F8DAD6 /* ImageView */,
+				4A5AF3E4252532F400F8DAD6 /* CollectionViewCell */,
+				4A5AF3DF25252BEB00F8DAD6 /* CollectionView */,
 			);
 			path = Reusable;
+			sourceTree = "<group>";
+		};
+		4A5AF3DF25252BEB00F8DAD6 /* CollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				4A5AF3E025252BF600F8DAD6 /* CFCollectionView.swift */,
+			);
+			path = CollectionView;
+			sourceTree = "<group>";
+		};
+		4A5AF3E4252532F400F8DAD6 /* CollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				4A5AF3E5252532FF00F8DAD6 /* CFCollectionViewCell.swift */,
+				4A5AF3E9252536F500F8DAD6 /* ListingCollectionViewCell.swift */,
+			);
+			path = CollectionViewCell;
+			sourceTree = "<group>";
+		};
+		4A5AF3EF2525407D00F8DAD6 /* ImageView */ = {
+			isa = PBXGroup;
+			children = (
+				4A5AF3F02525408600F8DAD6 /* CFListingImageView.swift */,
+			);
+			path = ImageView;
+			sourceTree = "<group>";
+		};
+		4A5AF3F4252541A200F8DAD6 /* UIButton */ = {
+			isa = PBXGroup;
+			children = (
+				4A5AF3F5252541AD00F8DAD6 /* CFButton.swift */,
+			);
+			path = UIButton;
+			sourceTree = "<group>";
+		};
+		4A5AF3FC2525428300F8DAD6 /* UILabel */ = {
+			isa = PBXGroup;
+			children = (
+				4A5AF3FD2525428900F8DAD6 /* CFLabel.swift */,
+			);
+			path = UILabel;
+			sourceTree = "<group>";
+		};
+		4A5AF404252544FE00F8DAD6 /* StackView */ = {
+			isa = PBXGroup;
+			children = (
+				4A5AF4052525450400F8DAD6 /* CFStackView.swift */,
+			);
+			path = StackView;
+			sourceTree = "<group>";
+		};
+		4A5AF412252569EE00F8DAD6 /* SearchController */ = {
+			isa = PBXGroup;
+			children = (
+				4A5AF413252569F700F8DAD6 /* CFSearchController.swift */,
+			);
+			path = SearchController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -209,12 +301,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4A447DA6252515BE0078304B /* ViewController.swift in Sources */,
+				4A5AF4022525439F00F8DAD6 /* UIView+Ext.swift in Sources */,
+				4A5AF3FA2525426E00F8DAD6 /* UIFont+Ext.swift in Sources */,
+				4A5AF3F12525408600F8DAD6 /* CFListingImageView.swift in Sources */,
+				4A447DA6252515BE0078304B /* HomeViewController.swift in Sources */,
+				4A5AF3F6252541AD00F8DAD6 /* CFButton.swift in Sources */,
+				4A5AF40A2525498A00F8DAD6 /* Int+Ext.swift in Sources */,
+				4A5AF3ED2525400D00F8DAD6 /* Constants.swift in Sources */,
+				4A5AF3E125252BF600F8DAD6 /* CFCollectionView.swift in Sources */,
 				4A447DCB252518C00078304B /* CARFAXDataModel.swift in Sources */,
 				4A447DAC252515BE0078304B /* CARFAX_Listings.xcdatamodeld in Sources */,
+				4A5AF414252569F700F8DAD6 /* CFSearchController.swift in Sources */,
+				4A5AF3E6252532FF00F8DAD6 /* CFCollectionViewCell.swift in Sources */,
+				4A5AF4062525450400F8DAD6 /* CFStackView.swift in Sources */,
 				4A447DC42525180E0078304B /* NetworkManager.swift in Sources */,
 				4A447DA2252515BE0078304B /* AppDelegate.swift in Sources */,
+				4A5AF3EA252536F500F8DAD6 /* ListingCollectionViewCell.swift in Sources */,
 				4A447DA4252515BE0078304B /* SceneDelegate.swift in Sources */,
+				4A5AF3FE2525428900F8DAD6 /* CFLabel.swift in Sources */,
 				4A447DC82525187E0078304B /* CFError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

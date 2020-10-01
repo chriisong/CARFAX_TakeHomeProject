@@ -55,10 +55,6 @@ struct Facet: Codable {
 
 // MARK: - Listing
 struct Listing: Codable, Hashable {
-    private let identifier = UUID()
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(identifier)
-    }
     let accidentHistory: History
     let advantage, backfill: Bool
     let badge: Badge
@@ -117,6 +113,11 @@ struct Listing: Codable, Hashable {
         case accidentHistory, advantage, backfill, badge, bedLength, bodytype, cabType, certified, currentPrice, dealer, dealerType, displacement, distanceToDealer, drivetype, engine, exteriorColor, firstSeen, followCount, following, fuel, hasViewed, id, imageCount, images, interiorColor, isEnriched, listPrice, make, mileage, model, monthlyPaymentEstimate, mpgCity, mpgHighway, newTopOptions, noAccidents, oneOwner, onePrice, onePriceArrows, onlineOnly, ownerHistory, personalUse, recordType, sentLead, serviceHistory, serviceRecords, sortScore, stockNumber, subTrim, topOptions, transmission, trim
         case vdpURL = "vdpUrl"
         case vehicleCondition, vehicleUseHistory, vin, year, listingStatus
+    }
+    
+    private let identifier = UUID()
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(identifier)
     }
 }
 
