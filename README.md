@@ -25,6 +25,7 @@ While there are many powerful 3rd party libraries available to help developers d
 
 ### Context Menu
 Also introduced in iOS 13, Context Menu creates a convenient way for users to interact with your app using Force Touch. The relevant context menu APIs that come with `UICollectionView` and `UITableView` make setting up this powerful feature that much easier.
+
 ![Alt Text](Resources/ContextMenu.gif) ![Alt Text](Resources/ContextMenu2.gif)
 
 ### UIMenu and UIAction
