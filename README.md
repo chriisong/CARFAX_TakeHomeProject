@@ -3,12 +3,14 @@
 
 ## Technology Overview
 ### Diffable Data Source
-
-### MapKit
-### Contacts
+![Alt Text](Resources/DiffableDataSource.gif)
+### MapKit and Contacts
+![Alt Text](Resources/MapKitContacts.gif)
 ### Search Controller
+![Alt Text](Resources/SearchController.gif)
 ### JSONDecoder and Results Type
 ### Context Menu
+![Alt Text](Resources/ContextMenu.gif) ![Alt Text](Resources/ContextMenu2.gif)
 ### UIMenu and UIAction
 ![Alt Text](Resources/Sorting.gif)
 
