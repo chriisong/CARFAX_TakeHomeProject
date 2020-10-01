@@ -9,6 +9,8 @@
 ### Search Controller
 ![Alt Text](Resources/SearchController.gif)
 ### JSONDecoder and Results Type
+![Alt Text](Resources/JSONDecoder.png) 
+![Alt Text](Resources/resultType.png)
 ### Context Menu
 ![Alt Text](Resources/ContextMenu.gif) ![Alt Text](Resources/ContextMenu2.gif)
 ### UIMenu and UIAction
