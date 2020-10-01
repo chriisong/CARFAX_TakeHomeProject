@@ -18,6 +18,7 @@ enum Image {
     static let listingTabBarImage           = UIImage(systemName: "list.bullet.rectangle")!
     static let savedTabBarImage             = UIImage(systemName: "heart.fill")!
     static let trashCircleFill              = UIImage(systemName: "trash.circle.fill")!
+    static let network                      = UIImage(systemName: "network")!
 }
 
 enum ScreenSize {

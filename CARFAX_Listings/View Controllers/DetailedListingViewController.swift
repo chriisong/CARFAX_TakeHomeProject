@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class DetailedListingViewController: UIViewController {
     struct Item: Hashable {
@@ -103,6 +104,22 @@ class DetailedListingViewController: UIViewController {
         navigationItem.title = title
         navigationItem.largeTitleDisplayMode = .always
         navigationController?.navigationBar.prefersLargeTitles = true
+        let saveAction = UIAction(title: "Save Listing", image: Image.arrowDownHeartFill, handler: saveButtonHandler)
+        let websiteAction = UIAction(title: "Visit Listing Website", image: Image.network, handler: websiteButtonHandler)
+        let moreButton = UIBarButtonItem(image: Image.ellipsisCircleFill, menu: UIMenu(title: "", children: [saveAction, websiteAction]))
+        navigationItem.rightBarButtonItem = moreButton
+    }
+    
+    private func websiteButtonHandler(action: UIAction) {
+        guard let url = URL(string: self.listing.vdpURL) else {
+            presentCFAlert(title: "Invalid URL", message: CFError.invalidURL.rawValue, buttonTitle: "OK")
+            return
+        }
+        presentSafariVC(with: url)
+    }
+    
+    private func saveButtonHandler(action: UIAction) {
+        
     }
     
     
@@ -299,10 +316,36 @@ extension DetailedListingViewController {
 
 extension DetailedListingViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
+        
         guard let sections = Section(rawValue: indexPath.section) else { return }
         switch sections {
-        case .dealer: break
+        case .dealer:
+            switch indexPath.item {
+            case 3:
+                guard let url = URL(string: self.listing.dealer.cfxMicrositeURL) else {
+                    presentCFAlert(title: "Invalid URL", message: CFError.invalidURL.rawValue, buttonTitle: "OK")
+                    return
+                }
+                presentSafariVC(with: url)
+            case 4:
+                guard let url = URL(string: self.listing.dealer.dealerInventoryURL) else {
+                    presentCFAlert(title: "Invalid URL", message: CFError.invalidURL.rawValue, buttonTitle: "OK")
+                    return
+                }
+                presentSafariVC(with: url)
+            default: break
+            }
         default: break
         }
+    }
+}
+
+extension DetailedListingViewController {
+    func presentSafariVC(with url: URL) {
+        let safariVC = SFSafariViewController(url: url)
+        safariVC.modalPresentationStyle = .formSheet
+        safariVC.preferredControlTintColor = .systemPink
+        present(safariVC, animated: true)
     }
 }
