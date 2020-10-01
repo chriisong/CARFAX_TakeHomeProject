@@ -61,7 +61,6 @@ class DetailedListingViewController: UIViewController {
         configureHierarchy()
         configureNavigationBar()
         configureDataSource()
-        print(numberOfPopularFeatures)
     }
     
     private func createLayout() -> UICollectionViewLayout {
@@ -125,8 +124,9 @@ class DetailedListingViewController: UIViewController {
     
     private func setupSnapshot(animated: Bool = false) {
         snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
+//        let rows = Array(1..<self.listing.imageCount).map { _ in Item()}
         snapshot.appendSections(Section.allCases)
-        
+//        snapshot.appendItems(rows, toSection: .images)
         DispatchQueue.main.async {
             self.dataSource.apply(self.snapshot, animatingDifferences: animated)
         }
@@ -140,7 +140,7 @@ class DetailedListingViewController: UIViewController {
             case .popularFeatures:
                 let rows = Array(1..<self.numberOfPopularFeatures).map { _ in Item()}
                 sectionSnapshot.append(rows, to: headerItem)
-                sectionSnapshot.expand([headerItem])
+                sectionSnapshot.collapse([headerItem])
             case .images:
                 let rows = Array(1..<self.listing.imageCount).map { _ in Item()}
                 sectionSnapshot.append(rows, to: headerItem)
@@ -148,7 +148,7 @@ class DetailedListingViewController: UIViewController {
             default:
                 let rows = Array(0..<section.numberOfRows).map { _ in Item()}
                 sectionSnapshot.append(rows, to: headerItem)
-                sectionSnapshot.expand([headerItem])
+                sectionSnapshot.collapse([headerItem])
             }
             
             DispatchQueue.main.async {
@@ -176,7 +176,10 @@ class DetailedListingViewController: UIViewController {
                 case 3:
                     return collectionView.dequeueConfiguredReusableCell(using: self.configuredListCell(), for: indexPath, item: ["Type": self.listing.onePriceArrows[2].text.rawValue])
                 case 4:
-                    let summary = "\(self.listing.serviceHistory.history?.first?.historyDescription ?? "") on \(self.listing.serviceHistory.history?.first?.date ?? "")"
+                    let history = self.listing.serviceHistory.history?.first?.historyDescription ?? "No information"
+                    let wordsToRemove = "<span class='bullet' style='font-weight: bold;'>&#8226;</span>"
+                    let cleanedString = history.replacingOccurrences(of: wordsToRemove, with: "\n", options: .regularExpression, range: nil)
+                    let summary = "\(cleanedString) on \(self.listing.serviceHistory.history?.first?.date ?? "")"
                     return collectionView.dequeueConfiguredReusableCell(using: self.configuredListCell(), for: indexPath, item: ["Service History": summary])
                 default: return collectionView.dequeueConfiguredReusableCell(using: self.configuredListCell(), for: indexPath, item: [:])
                 }
@@ -288,6 +291,7 @@ extension DetailedListingViewController {
         return UICollectionView.CellRegistration<UICollectionViewListCell, String> { cell, indexPath, title in
             var content = cell.defaultContentConfiguration()
             content.text = title
+            content.textProperties.font = UIFont.preferredFont(forTextStyle: .title3).bold()
             cell.contentConfiguration = content
             cell.accessories = [.outlineDisclosure(options: UICellAccessory.OutlineDisclosureOptions(style: .header))]
         }
@@ -344,7 +348,7 @@ extension DetailedListingViewController: UICollectionViewDelegate {
 extension DetailedListingViewController {
     func presentSafariVC(with url: URL) {
         let safariVC = SFSafariViewController(url: url)
-        safariVC.modalPresentationStyle = .formSheet
+        safariVC.modalPresentationStyle = DeviceTypes.isiPad ? .overFullScreen : .formSheet
         safariVC.preferredControlTintColor = .systemPink
         present(safariVC, animated: true)
     }

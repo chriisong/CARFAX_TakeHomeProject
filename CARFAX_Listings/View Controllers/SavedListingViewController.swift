@@ -127,6 +127,7 @@ extension SavedListingViewController {
         return UICollectionView.CellRegistration<UICollectionViewListCell, HeaderItem> { cell, indexPath, headerItem in
             var content = cell.defaultContentConfiguration()
             content.text = headerItem.title
+            content.textProperties.font = UIFont.preferredFont(forTextStyle: .title3).bold()
             cell.contentConfiguration = content
             let headerDisclosureOption = UICellAccessory.OutlineDisclosureOptions(style: .header)
             cell.accessories = [.outlineDisclosure(options: headerDisclosureOption)]
@@ -222,6 +223,16 @@ extension SavedListingViewController {
 extension SavedListingViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
+        guard let selectedListing = self.dataSource.itemIdentifier(for: indexPath) else { return }
+        switch selectedListing {
+        case .header(_): break
+        case .listing(let listing):
+            if let selected = self.listings.first(where: { $0.id == listing.id }) {
+                let vc = DetailedListingViewController(listing: selected)
+                let navigationController = UINavigationController(rootViewController: vc)
+                self.present(navigationController, animated: true)
+            }
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
