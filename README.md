@@ -3,11 +3,14 @@
 
 ## Technology Overview
 ### Diffable Data Source
+
 ### MapKit
 ### Contacts
 ### Search Controller
 ### JSONDecoder and Results Type
 ### Context Menu
+### UIMenu and UIAction
+![Alt Text](Resources/Sorting.gif)
 
 ## Challenges:
 ### Images
@@ -16,6 +19,7 @@
 - API was very complex and complicated, with deeply nested branches within branches.
     - This complexity made data persistence an issue (using Core Data).
     - Firebase would have worked better, but given the nature of the assignment, I opted not to use third party libraries.
+    - Solution to this issue was to persist unique ID of the user's selected listing, and on `SavedListingViewController`, I would fetch the listings with my network call, and filter the array of fetched listings by comparing each of the array's element to the persisted managed objects' id.
 - Since the API is static, I was not able to make a GET request with specific parameters.
     - As such, I had to be creative with data persistence, which required me to make a network call to fetch the listings and filter the listing by the `id` property that is assigned to each listing.
 
