@@ -5,14 +5,17 @@ This app was written in its entirety by Chris Song as part of an interview proce
 ## Technology and Feature Overview
 ### Diffable Data Source
 Diffable Data Source was introduced in WWDC 19. It completely changed the way we as iOS developers look at the very backbone of mobile application: `UICollectionView` and `UITableView`. `NSDiffableDataSourceSnapshot` takes snapshots of the data source and apply the differences to allow for performant and smooth data diffing. With iOS 14, Apple announced further improvements to Diffable Data Source, with features like `NSDiffableDataSourceSectionSnapshot`, `UICollectionViewListCell`, as well as other quality of life changes. The `NSDiffableDataSourceSectionSnapshot` allows not only collapsing and expanding lists, but also for each section to have different data source. `UICollectionViewListCell` and its related APIs come with a strong statement that Apple will move on from `UITableView` by consolidating all core work with `UICollectionView`.
+
 ![Alt Text](Resources/DiffableDataSource.gif)
 
 ### MapKit and Contacts
 MapKit and Contacts frameworks provide convenient way for developers to create postal address objects with `CNMutablePostalAddress` and using that to direct users to Apple Maps.
+
 ![Alt Text](Resources/MapKitContacts.gif)
 
 ### Search Controller
 Search Controller received an upgrade with iOS 13, and combining that with Diffable Data Source allows for powerful and performant querying task.
+
 ![Alt Text](Resources/SearchController.gif)
 
 ### JSONDecoder and Result Type
@@ -26,6 +29,7 @@ Also introduced in iOS 13, Context Menu creates a convenient way for users to in
 
 ### UIMenu and UIAction
 With iOS 14, UI elements that inherit from `UIControl` received a welcoming upgrade, which include elements like `UIButton` and `UIBarButtonItem`. Now with the added changes to `UIMenu` and `UIAction` that work along with `UIButton`, `UIBarButtonItem`, and the likes, creating menu elements becomes that much more intuitive and performant.
+
 ![Alt Text](Resources/Sorting.gif)
 
 ## Challenges:
