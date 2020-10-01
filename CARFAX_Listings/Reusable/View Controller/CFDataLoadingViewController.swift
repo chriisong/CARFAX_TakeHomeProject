@@ -15,6 +15,7 @@ class CFDataLoadingViewController: UIViewController {
     }
     
     func showLoadingView() {
+        guard loadingContainerView == nil else { return }
         loadingContainerView = UIView(frame: view.bounds)
         view.addSubview(loadingContainerView)
         loadingContainerView.backgroundColor = .systemBackground
@@ -35,6 +36,7 @@ class CFDataLoadingViewController: UIViewController {
     }
     
     func dismissLoadingView() {
+        guard loadingContainerView != nil else { return }
         DispatchQueue.main.async {
             self.loadingContainerView.removeFromSuperview()
             self.loadingContainerView = nil
