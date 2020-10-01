@@ -38,6 +38,7 @@
 		4A5AF431252588BC00F8DAD6 /* CFAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5AF430252588BC00F8DAD6 /* CFAlertViewController.swift */; };
 		4A5AF436252588DA00F8DAD6 /* CFAlertContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5AF435252588DA00F8DAD6 /* CFAlertContainerView.swift */; };
 		4A5AF43A25258D6A00F8DAD6 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5AF43925258D6A00F8DAD6 /* UIViewController+Ext.swift */; };
+		4A5AF43D2525903900F8DAD6 /* SavedListingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5AF43C2525903900F8DAD6 /* SavedListingCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,6 +76,7 @@
 		4A5AF430252588BC00F8DAD6 /* CFAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CFAlertViewController.swift; sourceTree = "<group>"; };
 		4A5AF435252588DA00F8DAD6 /* CFAlertContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CFAlertContainerView.swift; sourceTree = "<group>"; };
 		4A5AF43925258D6A00F8DAD6 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
+		4A5AF43C2525903900F8DAD6 /* SavedListingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedListingCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -221,6 +223,7 @@
 			children = (
 				4A5AF3E5252532FF00F8DAD6 /* CFCollectionViewCell.swift */,
 				4A5AF3E9252536F500F8DAD6 /* ListingCollectionViewCell.swift */,
+				4A5AF43C2525903900F8DAD6 /* SavedListingCollectionViewCell.swift */,
 			);
 			path = CollectionViewCell;
 			sourceTree = "<group>";
@@ -386,6 +389,7 @@
 				4A447DAC252515BE0078304B /* CARFAX_Listings.xcdatamodeld in Sources */,
 				4A5AF414252569F700F8DAD6 /* CFSearchController.swift in Sources */,
 				4A5AF3E6252532FF00F8DAD6 /* CFCollectionViewCell.swift in Sources */,
+				4A5AF43D2525903900F8DAD6 /* SavedListingCollectionViewCell.swift in Sources */,
 				4A5AF4062525450400F8DAD6 /* CFStackView.swift in Sources */,
 				4A447DC42525180E0078304B /* NetworkManager.swift in Sources */,
 				4A5AF42D2525833F00F8DAD6 /* SavedListingViewController.swift in Sources */,
