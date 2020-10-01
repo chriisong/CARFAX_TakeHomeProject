@@ -92,6 +92,7 @@ extension ListingViewController {
         navigationItem.title = "Listings"
         navigationItem.largeTitleDisplayMode = .always
         navigationController?.navigationBar.prefersLargeTitles = true
+        
         let sortByPriceHighAction = UIAction(title: SortOptions.priceHigh.title, image: Image.dollarSignSquareFill, handler: sortAction)
         let sortByPriceLowAction = UIAction(title: SortOptions.priceLow.title, image: Image.dollarSignSquareFill, handler: sortAction)
         
@@ -203,6 +204,7 @@ extension ListingViewController {
             guard let placemark = placemarks?.first else {
                 return
             }
+            
             let mkPlacemark = MKPlacemark(placemark: placemark)
             let mapItem = MKMapItem(placemark: mkPlacemark)
             mapItem.openInMaps(launchOptions: nil)
@@ -236,7 +238,9 @@ extension ListingViewController {
 extension ListingViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
+        
         guard let selectedListing = dataSource.itemIdentifier(for: indexPath) else { return }
+        
         let vc = DetailedListingViewController(listing: selectedListing)
         let navigationController = UINavigationController(rootViewController: vc)
         present(navigationController, animated: true)
@@ -246,21 +250,25 @@ extension ListingViewController: UICollectionViewDelegate {
         return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { suggestedActions -> UIMenu? in
             let saveAction = UIAction(title: "Save", image: Image.arrowDownHeartFill) { (action) in
                 guard let selectedListing = self.dataSource.itemIdentifier(for: indexPath) else { return }
+                
                 guard let contains = self.savedListingDataProvider.fetchedResultsController.fetchedObjects?.contains(where: { $0.id == selectedListing.id }),
                       contains == false else {
                     self.presentCFAlert(title: "Save Error", message: "You have already saved this listing.", buttonTitle: "OK")
                     return
                 }
+                
                 self.savedListingDataProvider.saveListing(listing: selectedListing) {
                     self.presentCFAlert(title: "Saved!", message: "Successfully saved this listing 🎉", buttonTitle: "OK")
                 }
             }
+            
             let children: [UIMenuElement] = [saveAction]
             let menu = UIMenu(title: "", image: nil, identifier: nil, options: .displayInline, children: children)
             return menu
         }
     }
 }
+
 extension ListingViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         guard let filter = searchController.searchBar.text, !filter.isEmpty else {

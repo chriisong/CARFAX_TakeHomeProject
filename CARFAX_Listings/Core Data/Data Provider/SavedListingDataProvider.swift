@@ -24,6 +24,7 @@ class SavedListingDataProvider {
         let fetchRequest = SavedListing.fetch()
         let sort = NSSortDescriptor(key: "id", ascending: false)
         fetchRequest.sortDescriptors = [sort]
+        
         fetchedResultsController = NSFetchedResultsController<SavedListing>(
             fetchRequest: fetchRequest,
             managedObjectContext: persistentContainer.viewContext,
@@ -40,6 +41,7 @@ class SavedListingDataProvider {
     
     func saveListing(listing: Listing, completionHandler: (() -> Void)? = nil) {
         let taskContext = persistentContainer.backgroundContext()
+        
         taskContext.perform {
             let newSavedListing = SavedListing(context: taskContext)
             newSavedListing.id = listing.id
@@ -50,6 +52,7 @@ class SavedListingDataProvider {
     
     func removeListing(listingToRemove: SavedListing, completionHandler: (() -> Void)? = nil) {
         let taskContext = persistentContainer.viewContext
+        
         taskContext.performAndWait {
             taskContext.delete(listingToRemove)
             taskContext.save(with: .deleteListing)

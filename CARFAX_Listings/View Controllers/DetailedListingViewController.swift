@@ -63,7 +63,6 @@ class DetailedListingViewController: UIViewController {
     private var collectionView: CFCollectionView!
     private var dataSource: UICollectionViewDiffableDataSource<Section, Item>!
     private var snapshot: NSDiffableDataSourceSnapshot<Section, Item>!
-    
     private var listing: Listing!
     private var numberOfPopularFeatures: Int {
         return listing.topOptions.count + listing.newTopOptions.count
@@ -96,8 +95,8 @@ class DetailedListingViewController: UIViewController {
     
     private func createLayout() -> UICollectionViewLayout {
         let sectionProvider = { (sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
-            
             guard let sectionKind = Section(rawValue: sectionIndex) else { return nil }
+            
             let section: NSCollectionLayoutSection
             
             switch sectionKind {
@@ -105,20 +104,22 @@ class DetailedListingViewController: UIViewController {
                 let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 item.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
+                
                 let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.85), heightDimension: .estimated(300))
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
+                
                 section = NSCollectionLayoutSection(group: group)
                 section.interGroupSpacing = 10
                 section.orthogonalScrollingBehavior = .groupPagingCentered
                 section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
-                
             default:
                 let layoutConfig = UICollectionLayoutListConfiguration(appearance: .insetGrouped)
                 section = NSCollectionLayoutSection.list(using: layoutConfig, layoutEnvironment: layoutEnvironment)
-                
             }
+            
             return section
         }
+        
         return UICollectionViewCompositionalLayout(sectionProvider: sectionProvider)
     }
     
@@ -132,6 +133,7 @@ class DetailedListingViewController: UIViewController {
         guard let contains = self.savedListingDataProvider.fetchedResultsController.fetchedObjects?.contains(where: { $0.id == self.listing.id }) else {
             return
         }
+        
         listingSavedState = contains ? .saved : .unsaved
     }
     
@@ -141,6 +143,7 @@ class DetailedListingViewController: UIViewController {
         navigationItem.title = title
         navigationItem.largeTitleDisplayMode = .always
         navigationController?.navigationBar.prefersLargeTitles = true
+        
         let saveAction = UIAction(title: listingSavedState.buttonTitle, image: listingSavedState.buttonImage, handler: saveButtonHandler)
         let websiteAction = UIAction(title: "Visit Listing Website", image: Image.network, handler: websiteButtonHandler)
         let moreButton = UIBarButtonItem(image: Image.ellipsisCircleFill, menu: UIMenu(title: "", children: [saveAction, websiteAction]))
@@ -152,6 +155,7 @@ class DetailedListingViewController: UIViewController {
             presentCFAlert(title: "Invalid URL", message: CFError.invalidURL.rawValue, buttonTitle: "OK")
             return
         }
+        
         presentSafariVC(with: url)
     }
     
@@ -182,6 +186,12 @@ class DetailedListingViewController: UIViewController {
             let headerItem = Item()
             sectionSnapshot.append([headerItem])
             
+            // MARK: Determining number of rows appending to each sectionSnapshot
+            /// Popular Features and Images' rows are dynamic. The number of these sections' rows are determined by the data provided in the API.
+            /// For Popular Features, we get the number of features by counting topOptions and newTopOptions
+            /// For Images, we get the number from listing.imagesCount
+            /// For other sections, the rows are determined by the type of data that we are using for each section. As such, they are static and are defined in the `Section` enum
+            
             switch section {
             case .popularFeatures:
                 let rows = Array(1..<self.numberOfPopularFeatures).map { _ in Item()}
@@ -210,7 +220,6 @@ class DetailedListingViewController: UIViewController {
             switch section {
             case .images:
                 return collectionView.dequeueConfiguredReusableCell(using: self.configureImageCell(), for: indexPath, item: self.listing)
-                
             case .overview:
                 switch indexPath.item {
                 case 0:
@@ -223,7 +232,9 @@ class DetailedListingViewController: UIViewController {
                     return collectionView.dequeueConfiguredReusableCell(using: self.configuredListCell(), for: indexPath, item: ["Type": self.listing.onePriceArrows[2].text.rawValue])
                 case 4:
                     let history = self.listing.serviceHistory.history?.first?.historyDescription ?? "No information"
+                    // Unwanted HTML left from the API
                     let wordsToRemove = "<span class='bullet' style='font-weight: bold;'>&#8226;</span>"
+                    // Replacing the unwanted HTML with a new line so that the data looks cleaner
                     let cleanedString = history.replacingOccurrences(of: wordsToRemove, with: "\n", options: .regularExpression, range: nil)
                     let summary = "\(cleanedString) on \(self.listing.serviceHistory.history?.first?.date ?? "")"
                     return collectionView.dequeueConfiguredReusableCell(using: self.configuredListCell(), for: indexPath, item: ["Service History": summary])
@@ -320,13 +331,13 @@ class DetailedListingViewController: UIViewController {
                 }
             }
         }
+        
         self.setupSnapshot()
     }
 }
 
-
+// MARK: Cell Configurations
 extension DetailedListingViewController {
-    // MARK: Cell Configurations
     private func configureImageCell() -> UICollectionView.CellRegistration<DetailedListingImageViewCell, Listing> {
         return UICollectionView.CellRegistration<DetailedListingImageViewCell, Listing> { cell, indexPath, listing in
             cell.setImage(for: self.listing, indexPath)
@@ -369,6 +380,7 @@ extension DetailedListingViewController: UICollectionViewDelegate {
         collectionView.deselectItem(at: indexPath, animated: true)
         
         guard let sections = Section(rawValue: indexPath.section) else { return }
+        
         switch sections {
         case .dealer:
             switch indexPath.item {
@@ -377,12 +389,14 @@ extension DetailedListingViewController: UICollectionViewDelegate {
                     presentCFAlert(title: "Invalid URL", message: CFError.invalidURL.rawValue, buttonTitle: "OK")
                     return
                 }
+                
                 presentSafariVC(with: url)
             case 4:
                 guard let url = URL(string: self.listing.dealer.dealerInventoryURL) else {
                     presentCFAlert(title: "Invalid URL", message: CFError.invalidURL.rawValue, buttonTitle: "OK")
                     return
                 }
+                
                 presentSafariVC(with: url)
             default: break
             }

@@ -13,6 +13,7 @@ extension Int {
         numberFormatter.numberStyle = .decimal
         return numberFormatter.string(from: NSNumber(value: self))!
     }
+    
     func currency() -> String {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .currencyAccounting

@@ -35,6 +35,7 @@ extension NSPersistentContainer {
         return newBackgroundContext()
     }
 }
+
 extension NSManagedObjectContext {
     private func handleSavingError(_ error: Error, contextualInfo: ContextSaveContextualInfo) {
         DispatchQueue.main.async {
@@ -57,6 +58,7 @@ extension NSManagedObjectContext {
     }
     func save(with contextualInfo: ContextSaveContextualInfo) {
         guard hasChanges else { return }
+        
         do {
             try save()
         } catch {

@@ -62,6 +62,7 @@ class ListingCollectionViewCell: CFCollectionViewCell {
                 }
             }
         }
+        
         let year = listing.year
         let make = listing.make.rawValue
         let model = listing.model
@@ -69,6 +70,7 @@ class ListingCollectionViewCell: CFCollectionViewCell {
         let state = listing.dealer.state.rawValue
         let listingTitle = "\(year) \(make) \(model)"
         let listingDealerLocation = "\(city), \(state)"
+        
         carMakeLabel.text = listingTitle
         priceLabel.text = listing.currentPrice.currency()
         mileageLabel.text = listing.mileage.withComma() + " miles"

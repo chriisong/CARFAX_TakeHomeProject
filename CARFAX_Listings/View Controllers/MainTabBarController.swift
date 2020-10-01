@@ -12,6 +12,7 @@ class MainTabBarController: UITabBarController {
         super.viewDidLoad()
         configure()
     }
+    
     private func configure() {
         view.backgroundColor = .systemBackground
         viewControllers = [createListingVC(), createSavedListingVC()]

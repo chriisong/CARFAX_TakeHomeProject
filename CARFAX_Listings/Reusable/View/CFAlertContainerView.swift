@@ -19,16 +19,6 @@ class CFAlertContainerView: UIView {
     
     let inset: CGFloat = 20
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-    }
-    
-    init(frameRect: CGRect) {
-        super.init(frame: frameRect)
-        configureForModal()
-    }
-    
     init(title: String, message: String, buttonTitle: String, action: (@escaping () -> Void)) {
         super.init(frame: .zero)
         self.alertTitle = title
@@ -39,14 +29,6 @@ class CFAlertContainerView: UIView {
     }
     
     required init?(coder: NSCoder) { fatalError("") }
-    
-    private func configureForModal() {
-        translatesAutoresizingMaskIntoConstraints = false
-        backgroundColor = .systemBackground
-        layer.cornerRadius = 20
-        layer.borderColor = UIColor.clear.cgColor
-        layer.borderWidth = 1
-    }
     
     private func configureForAlert() {
         titleLabel = CFLabel(frame: bounds, font: UIFont.preferredFont(forTextStyle: .title1).bold(), textColor: .label, withShadow: false)

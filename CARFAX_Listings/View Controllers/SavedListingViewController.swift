@@ -44,7 +44,6 @@ class SavedListingViewController: CFDataLoadingViewController {
     private var collectionView: CFCollectionView!
     private var dataSource: UICollectionViewDiffableDataSource<HeaderItem, SavedListItem>!
     private var snapshot: NSDiffableDataSourceSnapshot<HeaderItem, SavedListItem>!
-    
     private var listings: [Listing] = []
     private var headerData: [HeaderItem] = []
     
@@ -157,7 +156,6 @@ extension SavedListingViewController {
                 return cell
             }
         }
-        
     }
     
     private func setupSnapshot(headerItems: [HeaderItem], animated: Bool = false) {
@@ -189,7 +187,9 @@ extension SavedListingViewController {
     
     private func configureHeaderData(with listings: [Listing]) {
         self.headerData.removeAll()
+        
         var listingItems: [ListingItem] = []
+        
         for listing in listings {
             let name = "\(listing.make.rawValue) \(listing.model)"
             let location = "\(listing.dealer.city), \(listing.dealer.state.rawValue)"
@@ -207,7 +207,6 @@ extension SavedListingViewController {
         // group the listings by year
         let groupedListingItems = Dictionary(grouping: listingItems, by: { $0.year })
 
-        
         for (_, filteredListingItems) in groupedListingItems.enumerated() {
             // exit out of the for loop if the grouped listing is empty so that the `headerData` section is not appended
             if filteredListingItems.value.isEmpty { continue }
@@ -225,7 +224,9 @@ extension SavedListingViewController {
 extension SavedListingViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
+        
         guard let selectedListing = self.dataSource.itemIdentifier(for: indexPath) else { return }
+        
         switch selectedListing {
         case .header(_): break
         case .listing(let listing):
@@ -240,6 +241,7 @@ extension SavedListingViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { suggestedActions -> UIMenu? in
             guard let selectedListing = self.dataSource.itemIdentifier(for: indexPath) else { return nil }
+            
             switch selectedListing {
             case .header(_): return nil
             case .listing(let listing):
@@ -251,6 +253,7 @@ extension SavedListingViewController: UICollectionViewDelegate {
                         }
                     }
                 }
+                
                 let children: [UIMenuElement] = [removeAction]
                 let menu = UIMenu(title: "", image: nil, identifier: nil, options: .displayInline, children: children)
                 return menu

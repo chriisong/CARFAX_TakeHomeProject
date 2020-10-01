@@ -27,7 +27,7 @@ class CFAlertViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func dismissVC() {
+    private func dismissVC() {
         self.dismiss(animated: true)
     }
     

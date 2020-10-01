@@ -38,6 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func saveContext () {
         let context = coreDataStack.persistentContainer.backgroundContext()
+        
         if context.hasChanges {
             do {
                 try context.save()
