@@ -1,16 +1,14 @@
 //
-//  ListingViewController.swift
+//  SavedListingViewController.swift
 //  CARFAX_Listings
 //
 //  Created by Chris Song on 2020-09-30.
 //
 
-import Contacts
 import CoreData
-import MapKit
 import UIKit
 
-class ListingViewController: UIViewController {
+class SavedListingViewController: UIViewController {
     enum Section {
         case main
     }
@@ -25,7 +23,7 @@ class ListingViewController: UIViewController {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let provider = SavedListingDataProvider(
             with: appDelegate.coreDataStack.persistentContainer,
-            fetchedResultsControllerDelegate: nil)
+            fetchedResultsControllerDelegate: self)
         return provider
     }()
     
@@ -33,26 +31,36 @@ class ListingViewController: UIViewController {
     private var isSearching: Bool = false
     private var filteredListings: [Listing] = []
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        fetchListings(animated: true)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchListings()
         configureHierarchy()
         configureDataSource()
         configureNavigationBar()
         configureSearchController()
-
     }
     
 }
 
-extension ListingViewController {
-    private func fetchListings() {
+extension SavedListingViewController {
+    private func fetchListings(animated: Bool = false) {
         NetworkManager.shared.getListing { result in
             switch result {
             case .failure(let error): print(error.rawValue)
             case .success(let data):
-                self.listings = data.listings
-                self.setupSnapshot(filter: data.listings)
+                DispatchQueue.main.async {
+                    self.listings.removeAll()
+                    guard let savedListings = self.savedListingDataProvider.fetchedResultsController.fetchedObjects else { return }
+                    for listing in savedListings {
+                        if let fetchedListing = data.listings.first(where: { $0.id == listing.id }) {
+                            self.listings.append(fetchedListing)
+                        }
+                    }
+                    self.setupSnapshot(filter: self.listings, animated: animated)
+                }
             }
         }
     }
@@ -80,7 +88,7 @@ extension ListingViewController {
     }
     
     private func configureNavigationBar() {
-        navigationItem.title = "Listings"
+        navigationItem.title = "Saved Listings"
         navigationItem.largeTitleDisplayMode = .always
         navigationController?.navigationBar.prefersLargeTitles = true
         let sortByPriceHighAction = UIAction(title: SortOptions.priceHigh.title, image: Image.dollarSignSquareFill, handler: sortAction)
@@ -115,37 +123,6 @@ extension ListingViewController {
     private func configureCell() -> UICollectionView.CellRegistration<ListingCollectionViewCell, Listing> {
         return UICollectionView.CellRegistration<ListingCollectionViewCell, Listing> { cell, indexPath, listing in
             cell.set(with: listing)
-            cell.phoneButton.buttonAction {
-                self.phoneButtonPressed(for: listing, at: indexPath)
-            }
-            cell.mapButton.buttonAction {
-                self.mapButtonPressed(for: listing, at: indexPath)
-            }
-        }
-    }
-    
-    private func phoneButtonPressed(for listing: Listing, at indexPath: IndexPath) {
-        let phoneNumber = listing.dealer.phone
-        guard let url = URL(string: "tel://\(phoneNumber)") else {
-            return
-        }
-        UIApplication.shared.open(url, options: [:], completionHandler: nil)
-    }
-    private func mapButtonPressed(for listing: Listing, at indexPath: IndexPath) {
-        let address = CNMutablePostalAddress()
-        address.street = listing.dealer.address
-        address.city = listing.dealer.city
-        address.state = listing.dealer.state.rawValue
-        address.postalCode = listing.dealer.zip
-        address.country = "USA"
-        let geoloc = CLGeocoder()
-        geoloc.geocodePostalAddress(address) { placemarks, _ in
-            guard let placemark = placemarks?.first else {
-                return
-            }
-            let mkPlacemark = MKPlacemark(placemark: placemark)
-            let mapItem = MKMapItem(placemark: mkPlacemark)
-            mapItem.openInMaps(launchOptions: nil)
         }
     }
     
@@ -172,29 +149,28 @@ extension ListingViewController {
     }
 }
 
-extension ListingViewController: UICollectionViewDelegate {
+extension SavedListingViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
     }
     func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { suggestedActions -> UIMenu? in
-            let saveAction = UIAction(title: "Save", image: Image.arrowDownHeartFill) { (action) in
+            let removeAction = UIAction(title: "Remove", image: Image.trashCircleFill) { (action) in
                 guard let selectedListing = self.dataSource.itemIdentifier(for: indexPath) else { return }
-                guard let contains = self.savedListingDataProvider.fetchedResultsController.fetchedObjects?.contains(where: { $0.id == selectedListing.id }),
-                      contains == false else {
-                    return
-                }
-                self.savedListingDataProvider.saveListing(listing: selectedListing) {
-                    
+                if let savedListing = self.savedListingDataProvider.fetchedResultsController.fetchedObjects?.first(where: { $0.id == selectedListing.id }) {
+                    self.savedListingDataProvider.removeListing(listingToRemove: savedListing) {
+                        self.fetchListings(animated: true)
+                        print("removed!")
+                    }
                 }
             }
-            let children: [UIMenuElement] = [saveAction]
+            let children: [UIMenuElement] = [removeAction]
             let menu = UIMenu(title: "", image: nil, identifier: nil, options: .displayInline, children: children)
             return menu
         }
     }
 }
-extension ListingViewController: UISearchResultsUpdating {
+extension SavedListingViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         guard let filter = searchController.searchBar.text, !filter.isEmpty else {
             filteredListings.removeAll()
@@ -212,5 +188,17 @@ extension ListingViewController: UISearchResultsUpdating {
                 || $0.dealer.name.lowercased().contains(filter.lowercased())
         }
         setupSnapshot(filter: filteredListings, animated: true)
+    }
+}
+
+extension SavedListingViewController: NSFetchedResultsControllerDelegate {
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        switch type {
+        case .delete, .insert, .move:
+            fetchListings(animated: true)
+        case .update:
+            fetchListings()
+        default: break
+        }
     }
 }

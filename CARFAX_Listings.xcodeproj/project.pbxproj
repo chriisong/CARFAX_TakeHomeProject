@@ -34,6 +34,10 @@
 		4A5AF42225257D0E00F8DAD6 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A5AF42125257D0E00F8DAD6 /* CloudKit.framework */; };
 		4A5AF42525257DCB00F8DAD6 /* SavedListingDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5AF42425257DCB00F8DAD6 /* SavedListingDataProvider.swift */; };
 		4A5AF4292525807900F8DAD6 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5AF4282525807900F8DAD6 /* MainTabBarController.swift */; };
+		4A5AF42D2525833F00F8DAD6 /* SavedListingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5AF42C2525833F00F8DAD6 /* SavedListingViewController.swift */; };
+		4A5AF431252588BC00F8DAD6 /* CFAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5AF430252588BC00F8DAD6 /* CFAlertViewController.swift */; };
+		4A5AF436252588DA00F8DAD6 /* CFAlertContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5AF435252588DA00F8DAD6 /* CFAlertContainerView.swift */; };
+		4A5AF43A25258D6A00F8DAD6 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5AF43925258D6A00F8DAD6 /* UIViewController+Ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +71,10 @@
 		4A5AF42125257D0E00F8DAD6 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		4A5AF42425257DCB00F8DAD6 /* SavedListingDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedListingDataProvider.swift; sourceTree = "<group>"; };
 		4A5AF4282525807900F8DAD6 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		4A5AF42C2525833F00F8DAD6 /* SavedListingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedListingViewController.swift; sourceTree = "<group>"; };
+		4A5AF430252588BC00F8DAD6 /* CFAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CFAlertViewController.swift; sourceTree = "<group>"; };
+		4A5AF435252588DA00F8DAD6 /* CFAlertContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CFAlertContainerView.swift; sourceTree = "<group>"; };
+		4A5AF43925258D6A00F8DAD6 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +176,7 @@
 			children = (
 				4A447DA5252515BE0078304B /* ListingViewController.swift */,
 				4A5AF4282525807900F8DAD6 /* MainTabBarController.swift */,
+				4A5AF42C2525833F00F8DAD6 /* SavedListingViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -178,6 +187,7 @@
 				4A5AF3F92525426E00F8DAD6 /* UIFont+Ext.swift */,
 				4A5AF4012525439F00F8DAD6 /* UIView+Ext.swift */,
 				4A5AF4092525498A00F8DAD6 /* Int+Ext.swift */,
+				4A5AF43925258D6A00F8DAD6 /* UIViewController+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -185,6 +195,8 @@
 		4A447DC1252517580078304B /* Reusable */ = {
 			isa = PBXGroup;
 			children = (
+				4A5AF434252588D300F8DAD6 /* View */,
+				4A5AF42F252588B400F8DAD6 /* View Controller */,
 				4A5AF412252569EE00F8DAD6 /* SearchController */,
 				4A5AF404252544FE00F8DAD6 /* StackView */,
 				4A5AF3FC2525428300F8DAD6 /* UILabel */,
@@ -269,6 +281,22 @@
 			path = "Data Provider";
 			sourceTree = "<group>";
 		};
+		4A5AF42F252588B400F8DAD6 /* View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				4A5AF430252588BC00F8DAD6 /* CFAlertViewController.swift */,
+			);
+			path = "View Controller";
+			sourceTree = "<group>";
+		};
+		4A5AF434252588D300F8DAD6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4A5AF435252588DA00F8DAD6 /* CFAlertContainerView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -340,11 +368,14 @@
 			files = (
 				4A5AF41825257C6300F8DAD6 /* SavedListing+CoreDataClass.swift in Sources */,
 				4A5AF4022525439F00F8DAD6 /* UIView+Ext.swift in Sources */,
+				4A5AF43A25258D6A00F8DAD6 /* UIViewController+Ext.swift in Sources */,
 				4A5AF4292525807900F8DAD6 /* MainTabBarController.swift in Sources */,
 				4A5AF3FA2525426E00F8DAD6 /* UIFont+Ext.swift in Sources */,
+				4A5AF431252588BC00F8DAD6 /* CFAlertViewController.swift in Sources */,
 				4A5AF3F12525408600F8DAD6 /* CFListingImageView.swift in Sources */,
 				4A447DA6252515BE0078304B /* ListingViewController.swift in Sources */,
 				4A5AF3F6252541AD00F8DAD6 /* CFButton.swift in Sources */,
+				4A5AF436252588DA00F8DAD6 /* CFAlertContainerView.swift in Sources */,
 				4A5AF41925257C6300F8DAD6 /* SavedListing+CoreDataProperties.swift in Sources */,
 				4A5AF40A2525498A00F8DAD6 /* Int+Ext.swift in Sources */,
 				4A5AF42525257DCB00F8DAD6 /* SavedListingDataProvider.swift in Sources */,
@@ -357,6 +388,7 @@
 				4A5AF3E6252532FF00F8DAD6 /* CFCollectionViewCell.swift in Sources */,
 				4A5AF4062525450400F8DAD6 /* CFStackView.swift in Sources */,
 				4A447DC42525180E0078304B /* NetworkManager.swift in Sources */,
+				4A5AF42D2525833F00F8DAD6 /* SavedListingViewController.swift in Sources */,
 				4A447DA2252515BE0078304B /* AppDelegate.swift in Sources */,
 				4A5AF3EA252536F500F8DAD6 /* ListingCollectionViewCell.swift in Sources */,
 				4A447DA4252515BE0078304B /* SceneDelegate.swift in Sources */,

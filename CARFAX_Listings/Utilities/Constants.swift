@@ -15,6 +15,9 @@ enum Image {
     static let arrowUpArrowDownSquareFill = UIImage(systemName: "arrow.up.arrow.down.square.fill")!
     static let dollarSignSquareFill = UIImage(systemName: "dollarsign.square.fill")!
     static let arrowDownHeartFill = UIImage(systemName: "arrow.down.heart.fill")!
+    static let listingTabBarImage = UIImage(systemName: "list.bullet.rectangle")!
+    static let savedTabBarImage = UIImage(systemName: "heart.fill")!
+    static let trashCircleFill = UIImage(systemName: "trash.circle.fill")!
 }
 
 enum ScreenSize {

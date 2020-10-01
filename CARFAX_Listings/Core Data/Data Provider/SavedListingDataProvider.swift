@@ -17,6 +17,7 @@ class SavedListingDataProvider {
          fetchedResultsControllerDelegate: NSFetchedResultsControllerDelegate?) {
         self.persistentContainer = persistentContainer
         self.fetchedResultsControllerDelegate = fetchedResultsControllerDelegate
+        configureFetchedResultsController()
     }
     
     private func configureFetchedResultsController() {
@@ -48,7 +49,7 @@ class SavedListingDataProvider {
     }
     
     func removeListing(listingToRemove: SavedListing, completionHandler: (() -> Void)? = nil) {
-        let taskContext = persistentContainer.backgroundContext()
+        let taskContext = persistentContainer.viewContext
         taskContext.performAndWait {
             taskContext.delete(listingToRemove)
             taskContext.save(with: .deleteListing)
