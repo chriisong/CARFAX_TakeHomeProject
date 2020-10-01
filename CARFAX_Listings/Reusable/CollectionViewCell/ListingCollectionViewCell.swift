@@ -69,7 +69,7 @@ class ListingCollectionViewCell: CFCollectionViewCell {
         let listingTitle = "\(year) \(make) \(model)"
         let listingDealerLocation = "\(city), \(state)"
         carMakeLabel.text = listingTitle
-        priceLabel.text = listing.listPrice.currency()
+        priceLabel.text = listing.currentPrice.currency()
         mileageLabel.text = listing.mileage.withComma() + " miles"
         locationLabel.text = listingDealerLocation
     }

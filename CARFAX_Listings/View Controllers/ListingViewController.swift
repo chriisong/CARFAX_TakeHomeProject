@@ -100,10 +100,10 @@ extension ListingViewController {
     private func sortAction(action: UIAction) {
         switch action.title {
         case SortOptions.priceHigh.title:
-            self.listings.sort {$0.listPrice > $1.listPrice}
+            self.listings.sort {$0.currentPrice > $1.currentPrice}
             
         case SortOptions.priceLow.title:
-            self.listings.sort {$0.listPrice < $1.listPrice}
+            self.listings.sort {$0.currentPrice < $1.currentPrice}
             
         case SortOptions.mileHigh.title:
             self.listings.sort {$0.mileage > $1.mileage}
@@ -184,6 +184,10 @@ extension ListingViewController {
 extension ListingViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
+        guard let selectedListing = dataSource.itemIdentifier(for: indexPath) else { return }
+        let vc = DetailedListingViewController(listing: selectedListing)
+        let navigationController = UINavigationController(rootViewController: vc)
+        present(navigationController, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {

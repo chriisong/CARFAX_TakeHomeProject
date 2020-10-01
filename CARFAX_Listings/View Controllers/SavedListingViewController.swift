@@ -9,10 +9,6 @@ import CoreData
 import UIKit
 
 class SavedListingViewController: UIViewController {
-    enum Section {
-        case main
-    }
-    
     // MARK: Header cell data type
     struct HeaderItem: Hashable {
         let title: String
@@ -196,7 +192,7 @@ extension SavedListingViewController {
             let location = "\(listing.dealer.city), \(listing.dealer.state.rawValue)"
             let listingItem = ListingItem(
                 name: name,
-                price: listing.listPrice,
+                price: listing.currentPrice,
                 mileage: listing.mileage,
                 location: location,
                 year: listing.year,

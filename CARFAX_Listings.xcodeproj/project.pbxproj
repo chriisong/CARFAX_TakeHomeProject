@@ -38,8 +38,9 @@
 		4A5AF431252588BC00F8DAD6 /* CFAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5AF430252588BC00F8DAD6 /* CFAlertViewController.swift */; };
 		4A5AF436252588DA00F8DAD6 /* CFAlertContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5AF435252588DA00F8DAD6 /* CFAlertContainerView.swift */; };
 		4A5AF43A25258D6A00F8DAD6 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5AF43925258D6A00F8DAD6 /* UIViewController+Ext.swift */; };
-		4A5AF43D2525903900F8DAD6 /* SavedListingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5AF43C2525903900F8DAD6 /* SavedListingCollectionViewCell.swift */; };
 		4A5AF4412525ACBD00F8DAD6 /* DetailedListingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5AF4402525ACBD00F8DAD6 /* DetailedListingViewController.swift */; };
+		4A5AF4452525E17100F8DAD6 /* Double+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5AF4442525E17100F8DAD6 /* Double+Ext.swift */; };
+		4A5AF4482525E36200F8DAD6 /* DetailedListingImageViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5AF4472525E36200F8DAD6 /* DetailedListingImageViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,8 +78,9 @@
 		4A5AF430252588BC00F8DAD6 /* CFAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CFAlertViewController.swift; sourceTree = "<group>"; };
 		4A5AF435252588DA00F8DAD6 /* CFAlertContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CFAlertContainerView.swift; sourceTree = "<group>"; };
 		4A5AF43925258D6A00F8DAD6 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
-		4A5AF43C2525903900F8DAD6 /* SavedListingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedListingCollectionViewCell.swift; sourceTree = "<group>"; };
 		4A5AF4402525ACBD00F8DAD6 /* DetailedListingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedListingViewController.swift; sourceTree = "<group>"; };
+		4A5AF4442525E17100F8DAD6 /* Double+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Ext.swift"; sourceTree = "<group>"; };
+		4A5AF4472525E36200F8DAD6 /* DetailedListingImageViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedListingImageViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,6 +195,7 @@
 				4A5AF4012525439F00F8DAD6 /* UIView+Ext.swift */,
 				4A5AF4092525498A00F8DAD6 /* Int+Ext.swift */,
 				4A5AF43925258D6A00F8DAD6 /* UIViewController+Ext.swift */,
+				4A5AF4442525E17100F8DAD6 /* Double+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -226,7 +229,7 @@
 			children = (
 				4A5AF3E5252532FF00F8DAD6 /* CFCollectionViewCell.swift */,
 				4A5AF3E9252536F500F8DAD6 /* ListingCollectionViewCell.swift */,
-				4A5AF43C2525903900F8DAD6 /* SavedListingCollectionViewCell.swift */,
+				4A5AF4472525E36200F8DAD6 /* DetailedListingImageViewCell.swift */,
 			);
 			path = CollectionViewCell;
 			sourceTree = "<group>";
@@ -386,13 +389,14 @@
 				4A5AF40A2525498A00F8DAD6 /* Int+Ext.swift in Sources */,
 				4A5AF42525257DCB00F8DAD6 /* SavedListingDataProvider.swift in Sources */,
 				4A5AF3ED2525400D00F8DAD6 /* Constants.swift in Sources */,
+				4A5AF4452525E17100F8DAD6 /* Double+Ext.swift in Sources */,
 				4A5AF3E125252BF600F8DAD6 /* CFCollectionView.swift in Sources */,
 				4A5AF41C25257C9B00F8DAD6 /* CoreDataManager.swift in Sources */,
 				4A447DCB252518C00078304B /* CARFAXDataModel.swift in Sources */,
 				4A447DAC252515BE0078304B /* CARFAX_Listings.xcdatamodeld in Sources */,
 				4A5AF414252569F700F8DAD6 /* CFSearchController.swift in Sources */,
 				4A5AF3E6252532FF00F8DAD6 /* CFCollectionViewCell.swift in Sources */,
-				4A5AF43D2525903900F8DAD6 /* SavedListingCollectionViewCell.swift in Sources */,
+				4A5AF4482525E36200F8DAD6 /* DetailedListingImageViewCell.swift in Sources */,
 				4A5AF4062525450400F8DAD6 /* CFStackView.swift in Sources */,
 				4A447DC42525180E0078304B /* NetworkManager.swift in Sources */,
 				4A5AF42D2525833F00F8DAD6 /* SavedListingViewController.swift in Sources */,
